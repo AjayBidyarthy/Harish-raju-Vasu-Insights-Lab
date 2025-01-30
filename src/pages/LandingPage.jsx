@@ -9,7 +9,7 @@ import { MainContent } from "../components/LandingPage/MainContent";
       <Header />
       <div className="flex flex-1">
         <Sidebar />
-        <div className="flex-1 flex flex-col bg-[#f5f9fc]">
+        <div className="flex-1 flex flex-col bg-[#F8F8F8]">
           <Toolbar />
           <MainContent/>
         </div>

@@ -1,7 +1,8 @@
 import { Header } from "../components/LandingPage/Header"
 import { Sidebar } from "../components/LandingPage/Sidebar"
-import { DataProductsToolbar } from "../components/DataProducts/DataProductsToolbar"
 import { DataProducts } from "../components/DataProducts/DataProducts"
+import SearchBar from "../components/DataProducts/SearchBar"
+import { Toolbar } from "../components/LandingPage/Toolbar"
 
 export function Dataproducts() {
 
@@ -11,7 +12,8 @@ export function Dataproducts() {
       <div className="flex flex-1">
         <Sidebar />
         <div className="flex-1 flex flex-col bg-[#f5f9fc]">
-         <DataProductsToolbar />
+          <Toolbar/>
+          <SearchBar/>
          <DataProducts /> 
         </div>
       </div>

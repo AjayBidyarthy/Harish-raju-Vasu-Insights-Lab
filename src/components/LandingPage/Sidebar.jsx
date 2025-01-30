@@ -1,48 +1,28 @@
-import { Home, Search } from "lucide-react"
-import { useNavigate, useLocation } from "react-router-dom"
+"use client"
 
-export const Sidebar = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
+import * as React from "react"
+import { Home, Network} from "lucide-react"
+
+export  function Sidebar() {
+  const [isCollapsed, setIsCollapsed] = React.useState(false)
 
   return (
-    <div className="w-64 border-r bg-white flex flex-col">
-      <div className="p-4 border-b">
-        <div className="flex items-center gap-2 text-[#0047bb] mb-4">
-          <Home className="w-5 h-5" />
-          <span className="font-medium">Navigator</span>
-        </div>
-        <div className="relative">
-          <Search className="w-4 h-4 absolute left-2 top-2.5 text-gray-500" />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full pl-8 pr-2 py-1.5 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-      </div>
-      <nav className="p-2">
-        <div className="space-y-1">
+    <div className="flex h-screen">
+    <nav className="flex flex-col bg-[#F8F8F8] text-white w-[60px] py-4 border-r-2 border-blue-400">
+        <div className="flex flex-col items-center space-y-6">
           <button
-            className={`w-full text-left px-2 py-1.5 rounded ${
-              location.pathname === "/" ? "bg-blue-50 text-blue-600" : "hover:bg-gray-100"
-            }`}
-            onClick={() => navigate("/")}
+            onClick={() => (window.location.href = "/")}
+            className="p-3  text-blue-800 rounded-lg transition-colors"
           >
-            Home
+            <Home size={20} />
           </button>
           <button
-            className={`w-full text-left px-2 py-1.5 rounded ${
-              location.pathname === "/dataproducts" ? "bg-blue-50 text-blue-600" : "hover:bg-gray-100"
-            }`}
-            onClick={() => navigate("/dataproducts")}
+            onClick={() => (window.location.href = "/network")}
+            className="p-3  text-blue-800 rounded-lg transition-colors"
           >
-            Data Products
+            <Network size={20} />
           </button>
-          <button  className={`w-full text-left px-2 py-1.5 rounded ${
-              location.pathname === "/projects" ? "bg-blue-50 text-blue-600" : "hover:bg-gray-100"
-            }`}
-            onClick={() => navigate("/projects")}>Projects</button>
+          <div className="flex-1" />
         </div>
       </nav>
     </div>
