@@ -1,7 +1,8 @@
 import { ProductCard } from "./ProductCard";
-import { Bell } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const MainContent = () => {
+  const navigate = useNavigate();
   const productData = [
     {
       icon: (
@@ -11,7 +12,7 @@ export const MainContent = () => {
       ),
       title: "My Products",
       description: "Discover products and get data insights",
-      onOpen: () => console.log("Open products"),
+      onOpen: () => navigate("/products"), 
     },
     {
       icon: (

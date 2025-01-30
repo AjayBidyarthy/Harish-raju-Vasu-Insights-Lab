@@ -1,4 +1,4 @@
-import { Bell, Cog, User } from "lucide-react"
+import { Bell, Settings, User } from "lucide-react"
 
 export const Header = () => {
     return (
@@ -15,7 +15,7 @@ export const Header = () => {
         </div>
         <div className="flex items-center gap-4">
           <Bell className="w-6 h-6" />
-          <Cog className="w-6 h-6" />
+          <Settings className="w-6 h-6" />
           <User className="w-6 h-6" />
         </div>
       </header>

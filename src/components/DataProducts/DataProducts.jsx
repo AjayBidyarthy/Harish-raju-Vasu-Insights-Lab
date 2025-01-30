@@ -3,7 +3,6 @@
 import { ChevronRight, Grid, LayoutGrid, Star, Users } from "lucide-react"
 import { useState } from "react"
 
-// Sample data
 const insights = Array(8).fill({
   name: "Customer Insights",
   rating: 4.5,
@@ -17,24 +16,50 @@ const insights = Array(8).fill({
 
 export function DataProducts() {
   const [isGridView, setIsGridView] = useState(true)
+  const [activeTab, setActiveTab] = useState("all") // Track active tab
 
   return (
     <div className="p-4 bg-white">
+      {/* Header Section */}
       <div className="flex justify-between items-center mb-4">
-        <div>All({insights.length})</div>
+   
+        <div className="relative flex space-x-6 border-b md:ml-6">
+          <button
+            className={`relative pb-2 text-sm font-medium ${
+              activeTab === "all" ? "text-[#1a73e8]" : "text-gray-600"
+            }`}
+            onClick={() => setActiveTab("all")}
+          >
+            All ({insights.length})
+            {activeTab === "all" && (
+              <div className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-[#1a73e8]" />
+            )}
+          </button>
+        </div>
+
+        {/* Filter and View Toggle Buttons */}
         <div className="flex gap-2">
-          <button className="px-3 py-1.5 border rounded-md flex items-center gap-2">Filter</button>
-          <div className="flex border rounded-md">
-            <button className={`p-1.5 ${isGridView ? "bg-gray-100" : ""}`} onClick={() => setIsGridView(true)}>
+          <button className="px-3 py-1.5 border rounded-md flex items-center gap-2 text-sm">
+            <span className="text-gray-700">Filter</span>
+          </button>
+          <div className="flex border rounded-md overflow-hidden">
+            <button
+              className={`p-1.5 ${isGridView ? "bg-black text-white" : "bg-white text-black"}`}
+              onClick={() => setIsGridView(true)}
+            >
               <LayoutGrid className="w-5 h-5" />
             </button>
-            <button className={`p-1.5 ${!isGridView ? "bg-gray-100" : ""}`} onClick={() => setIsGridView(false)}>
+            <button
+              className={`p-1.5 ${!isGridView ? "bg-black text-white" : "bg-white text-black"}`}
+              onClick={() => setIsGridView(false)}
+            >
               <Grid className="w-5 h-5" />
             </button>
           </div>
         </div>
       </div>
 
+      {/* Grid/List View Toggle */}
       {isGridView ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {insights.map((insight, i) => (
@@ -105,7 +130,7 @@ export function DataProducts() {
               <div className="w-5">
                 <input type="checkbox" className="rounded" />
               </div>
-              <div >{insight.name}</div>
+              <div>{insight.name}</div>
               <div className="text-green-600">{insight.dataQuality}%</div>
               <div>{insight.source}</div>
               <div>{insight.domain}</div>
@@ -126,4 +151,3 @@ export function DataProducts() {
     </div>
   )
 }
-
