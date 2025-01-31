@@ -23,7 +23,7 @@ export const MainContent = () => {
       ),
       title: "My Projects",
       description: "Explore Projects and uncover data insights",
-      onOpen: () => console.log("Open projects"),
+      onOpen: () => navigate("/projects"),
     },
     {
       icon: (
