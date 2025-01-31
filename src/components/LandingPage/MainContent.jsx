@@ -6,18 +6,19 @@ export const MainContent = () => {
   const productData = [
     {
       icon: (
-        <div className="w-24 h-24 bg-[#00758F] rounded-full flex items-center justify-center mb-2">
-        <span className="text-white text-xl font-bold">Myproduct</span>
-      </div>
-      ),
+        <div className="w-34 h-34 bg-[#00758F] rounded-full flex items-center justify-center mb-2">
+          <img src="assets/Products.png" alt="My Product" className="w-full h-full object-contain rounded-full" />
+        </div>
+      )
+      ,
       title: "My Products",
       description: "Discover products and get data insights",
       onOpen: () => navigate("/products"), 
     },
     {
       icon: (
-        <div className="w-24 h-24 bg-[#00758F] rounded-full flex items-center justify-center mb-2">
-          <span className="text-white text-xl font-bold">MySQL</span>
+        <div className="w-34 h-34 bg-[#00758F] rounded-full flex items-center justify-center mb-2">
+          <img src="assets/Projects.png" alt="My Product" className="w-full h-full object-contain rounded-full" />
         </div>
       ),
       title: "My Projects",
@@ -26,8 +27,8 @@ export const MainContent = () => {
     },
     {
       icon: (
-        <div className="w-24 h-24 bg-[#F9E04B] rounded-full flex items-center justify-center mb-2">
-          <span className="text-black text-2xl">jl</span>
+        <div className="w-34 h-34 bg-[#00758F] rounded-full flex items-center justify-center mb-2">
+          <img src="assets/MetaGraph.png" alt="My Product" className="w-full h-full object-contain rounded-full" />
         </div>
       ),
       title: "MetaGraphs",
