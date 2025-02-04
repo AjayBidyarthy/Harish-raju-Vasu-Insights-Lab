@@ -2,7 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {LandingPage} from './pages/LandingPage';
 import { Dataproducts } from './pages/Dataproducts';
+import {ProjectPage} from './components/Projects/ProjectPage';
 import { Projects } from './pages/Projects';
+import PageProject from './pages/PageProject';
 
 
 function App() {
@@ -12,6 +14,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/products" element={<Dataproducts />} />
         <Route path="/projects" element={<Projects/>}/>
+        <Route path="/projects/:id" element={<PageProject />} />
       </Routes>
     </Router>
   );

@@ -1,13 +1,15 @@
 import { ChevronRight, Grid, LayoutGrid, Search, X, Plus, ChevronDown } from "lucide-react"
 import { useState } from "react"
 import FilterSidebar from "../DataProducts/FilterSidebar"
+import { useNavigate } from "react-router-dom";
 
-const insights = Array(5).fill({
-  name: "SupplyChain Analysis",
-  insights: 10,
-  insights_workbook: 5,
-  added_products: 5,
-})
+const insights = [
+  { id: 1, name: "Project 1", insights: 10, insights_workbook: 5, added_products: 5 },
+  { id: 2, name: "Project 2", insights: 8, insights_workbook: 3, added_products: 4 },
+  { id: 3, name: "Project 3", insights: 12, insights_workbook: 7, added_products: 6 },
+  { id: 4, name: "Project 4", insights: 15, insights_workbook: 10, added_products: 8 },
+  { id: 5, name: "Project 5", insights: 6, insights_workbook: 2, added_products: 3 },
+];
 
 export function ProjectDetails() {
   const [isGridView, setIsGridView] = useState(true)
@@ -16,7 +18,7 @@ export function ProjectDetails() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [selectedProducts, setSelectedProducts] = useState([])
-
+  const navigate = useNavigate();
   const products = [
     "Product 1",
     "Product 2",
@@ -172,13 +174,15 @@ export function ProjectDetails() {
                   <div className="bg-[#E2D7FA] rounded-lg p-4 mb-4">
                     <div className="flex justify-between items-start">
                       <h3 className="font-medium text-gray-900">Project_{i + 1}</h3>
-                      <button className="text-blue-600 text-sm flex items-center hover:underline">
-                        View Details
-                        <ChevronRight className="w-4 h-4 ml-1" />
-                      </button>
+                      <button
+  className="text-blue-600 text-sm flex items-center hover:underline"
+  onClick={() => navigate(`/projects/${insight.id}`)}
+>
+  View Details
+  <ChevronRight className="w-4 h-4 ml-1" />
+</button>
                     </div>
                   </div>
-                  
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col text-sm">
                       <span className="text-gray-600 mb-1">INSIGHTS</span>
@@ -209,7 +213,13 @@ export function ProjectDetails() {
                   <div className="font-medium">Project_{i + 1}</div>
                   <div>{insight.insights}</div>
                   <div>{insight.insights_workbook}</div>
-                  <button className="text-blue-600 hover:underline">View Details</button>
+                  <button
+  className="text-blue-600 text-sm flex items-center hover:underline"
+  onClick={() => navigate(`/projects/${insight.id}`)}
+>
+  View Details
+  <ChevronRight className="w-4 h-4 ml-1" />
+</button>
                 </div>
               ))}
             </div>

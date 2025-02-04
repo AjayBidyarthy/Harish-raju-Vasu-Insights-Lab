@@ -9,6 +9,7 @@ export const Header = () => {
               <path d="M3 12h18M3 6h18M3 18h18" />
             </svg>
           </button>
+          <img src="/assets/icon.png" alt="Icon" className="w-8 h-8"/>
           <h1 className="text-xl font-poppins font-bold">
   <span className="text-white">DATA</span><span className="text-gray-300">MARKET</span>
 </h1>
