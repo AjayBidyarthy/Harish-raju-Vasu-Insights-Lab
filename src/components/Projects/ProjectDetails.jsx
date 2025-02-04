@@ -33,8 +33,7 @@ export function ProjectDetails() {
   }
 
   return (
-    <div className="p-4 bg-white">
-      {/* Header Section */}
+    <div className="p-4 font-poppins bg-white">
       <div className="flex justify-between items-center mb-4">
         <div className="relative flex space-x-6 border-b md:ml-6">
           <button
