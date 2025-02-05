@@ -1,11 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import { ProductCard } from "../LandingPage/ProductCard";
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MainSection = ({ insights }) => {
   const { id } = useParams();
   const containerRef = useRef(null);
   const [lines, setLines] = useState([]);
+  const navigate = useNavigate();
 
   const productData = [
     {
@@ -16,7 +18,7 @@ const MainSection = ({ insights }) => {
       ),
       title: "Ask Albus",
       description: "Interconnected entities enabling smart insights.",
-      onOpen: () => navigate("/products"),
+      onOpen: () => navigate("/albus"),
     },
     {
       icon: (
@@ -26,7 +28,7 @@ const MainSection = ({ insights }) => {
       ),
       title: "SQL Studio",
       description: "Manage databases with intuitive tools",
-      onOpen: () => navigate("/projects"),
+      onOpen: () => navigate("/sql"),
     },
     {
       icon: (
@@ -36,7 +38,7 @@ const MainSection = ({ insights }) => {
       ),
       title: "Python Code",
       description: "Developing applications with Python functionality",
-      onOpen: () => console.log("Open metagraph"),
+      onOpen: () => navigate("/notebook"),
     }
   ];
 
