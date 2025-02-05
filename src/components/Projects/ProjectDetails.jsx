@@ -46,7 +46,7 @@ export function ProjectDetails() {
     };
 
     fetchProducts();
-  }, []); // Empty dependency array means this runs once when component mounts
+  }, []); 
 
   const toggleProduct = (product) => {
     setSelectedProducts(prev => 
@@ -163,8 +163,6 @@ export function ProjectDetails() {
                 </div>
               </div>
             </div>
-
-            {/* Modal Footer */}
             <div className="flex justify-end gap-3 mt-6">
               <button
                 onClick={() => setIsModalOpen(false)}
