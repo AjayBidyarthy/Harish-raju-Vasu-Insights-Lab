@@ -6,6 +6,7 @@ import { AskAlbus } from './pages/AskAlbus';
 import { Projects } from './pages/Projects';
 import PageProject from './pages/PageProject';
 import { Insights } from './pages/Insights';
+import { InsightsDetail } from './pages/InsightsDetail';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/projects/:id" element={<PageProject />} />
         <Route path="/albus" element={<AskAlbus/>} />
         <Route path="/projects/:id/insights" element={<Insights />} />
+        <Route path="/projects/:id/insights/:id" element={<InsightsDetail />} />
       </Routes>
     </Router>
   );

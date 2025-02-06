@@ -35,9 +35,13 @@ const InsightsList = ({ insights }) => {
                 <td className="py-4 px-6 text-sm text-black-600">{insight.source}</td>
                 <td className="py-4 px-6 text-sm text-black-600">{insight.datetime}</td>
                 <td className="py-4 px-6">
-                  <button className="text-blue-600 hover:text-blue-800 text-sm">
-                    View
-                  </button>
+                <button
+                  className="text-blue-600 hover:text-blue-800 text-sm"
+                  onClick={() => navigate(`/projects/${id}/insights/${insight.id}`)}
+                >
+                  View
+                </button>
+
                 </td>
               </tr>
             ))}
