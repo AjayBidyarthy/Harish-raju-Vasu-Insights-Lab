@@ -19,7 +19,7 @@ function App() {
         <Route path="/projects/:id" element={<PageProject />} />
         <Route path="/albus" element={<AskAlbus/>} />
         <Route path="/projects/:id/insights" element={<Insights />} />
-        <Route path="/projects/:id/insights/:id" element={<InsightsDetail />} />
+        <Route path="/projects/:id/insights/:insightId" element={<InsightsDetail />} />
       </Routes>
     </Router>
   );

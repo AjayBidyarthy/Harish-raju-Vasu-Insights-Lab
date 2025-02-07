@@ -2,20 +2,111 @@ import { useState } from "react";
 import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 
 const SideNav = ({ insights }) => {
-  const [isInsightsOpen, setIsInsightsOpen] = useState(true);
-  const [isWorkbookOpen, setIsWorkbookOpen] = useState(true);
-  const [isProductsOpen, setIsProductsOpen] = useState(true);
+  const [isInsightsOpen, setIsInsightsOpen] = useState(false);
+  const [isWorkbookOpen, setIsWorkbookOpen] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
   const location = useLocation();
   const { id } = useParams(); // Capture the project ID from the URL
   const navigate = useNavigate(); // Hook for programmatic navigation
 
-  const insightsList = [
-    { id: 1, name: "Insight_1" },
-    { id: 2, name: "Insight_2" },
-    { id: 3, name: "Insight_3" },
-    { id: 4, name: "Insight_4" },
-    { id: 5, name: "Insight_5" }
+  const projectData = [
+    {
+      id: 1,
+      projectInfo: {
+        name: "Project 1",
+        insights: 10,
+        insights_workbook: [
+          { id: 1, name: "InsightWorkbook_1" },
+          { id: 2, name: "InsightWorkbook_2" },
+          { id: 3, name: "InsightWorkbook_3" },
+          { id: 4, name: "InsightWorkbook_4" },
+          { id: 5, name: "InsightWorkbook_5" }
+        ],
+        added_products: 5
+      },
+      insightsList: [
+        { id: 1, name: "Insights_1", format: "Code", source: "Albus AI", datetime: "30/1/25 - 15:15" },
+        { id: 2, name: "Insights_2", format: "Code, Text", source: "Python Code", datetime: "30/1/25 - 15:15" }
+      ]
+    },
+    {
+      id: 2,
+      projectInfo: {
+        name: "Project 2",
+        insights: 8,
+        insights_workbook: [
+          { id: 6, name: "InsightWorkbook_6" },
+          { id: 7, name: "InsightWorkbook_7" },
+          { id: 8, name: "InsightWorkbook_8" },
+          { id: 9, name: "InsightWorkbook_9" },
+          { id: 10, name: "InsightWorkbook_10" }
+        ],
+        added_products: 4
+      },
+      insightsList: [
+        { id: 3, name: "Insights_3", format: "Text", source: "SQL Studio", datetime: "30/1/25 - 15:15" },
+        { id: 4, name: "Insights_4", format: "Code", source: "Albus AI", datetime: "30/1/25 - 15:15" }
+      ]
+    },
+    {
+      id: 3,
+      projectInfo: {
+        name: "Project 3",
+        insights: 12,
+        insights_workbook: [
+          { id: 11, name: "InsightWorkbook_11" },
+          { id: 12, name: "InsightWorkbook_12" },
+          { id: 13, name: "InsightWorkbook_13" },
+          { id: 14, name: "InsightWorkbook_14" },
+          { id: 15, name: "InsightWorkbook_15" }
+        ],
+        added_products: 6
+      },
+      insightsList: [
+        { id: 5, name: "Insights_5", format: "Text", source: "Python Code", datetime: "30/1/25 - 15:15" },
+        { id: 6, name: "Insights_6", format: "Code, Text", source: "SQL Studio", datetime: "30/1/25 - 15:15" }
+      ]
+    },
+    {
+      id: 4,
+      projectInfo: {
+        name: "Project 4",
+        insights: 15,
+        insights_workbook: [
+          { id: 16, name: "InsightWorkbook_16" },
+          { id: 17, name: "InsightWorkbook_17" },
+          { id: 18, name: "InsightWorkbook_18" },
+          { id: 19, name: "InsightWorkbook_19" },
+          { id: 20, name: "InsightWorkbook_20" }
+        ],
+        added_products: 8
+      },
+      insightsList: [
+        { id: 7, name: "Insights_7", format: "Code", source: "Albus AI", datetime: "30/1/25 - 15:15" },
+        { id: 8, name: "Insights_8", format: "Code", source: "Python Code", datetime: "30/1/25 - 15:15" }
+      ]
+    },
+    {
+      id: 5,
+      projectInfo: {
+        name: "Project 5",
+        insights: 6,
+        insights_workbook: [
+          { id: 21, name: "InsightWorkbook_21" },
+          { id: 22, name: "InsightWorkbook_22" },
+          { id: 23, name: "InsightWorkbook_23" },
+          { id: 24, name: "InsightWorkbook_24" },
+          { id: 25, name: "InsightWorkbook_25" }
+        ],
+        added_products: 3
+      },
+      insightsList: [
+        { id: 9, name: "Insights_9", format: "Text", source: "Albus AI", datetime: "30/1/25 - 15:15" },
+        { id: 10, name: "Insights_10", format: "Code", source: "Python Code", datetime: "30/1/25 - 15:15" }
+      ]
+    }
   ];
+  
 
   const handleInsightsClick = () => {
     setIsInsightsOpen(!isInsightsOpen);
@@ -60,21 +151,22 @@ const SideNav = ({ insights }) => {
             {isInsightsOpen && (
               <div className="ml-8 mt-1 relative">
                 <div className="absolute left-[-14px] top-0 bottom-0 w-[2px] bg-gray-200"></div>
-                {insightsList.map((item) => (
-                  <div key={item.id} className="relative">
-                    <div className="absolute left-[-14px] top-[50%] w-3 h-[2px] bg-gray-200"></div>
-                    <Link
-                      to={`/project/${item.id}`}
-                      className={`block py-1 px-2 rounded ${
-                        location.pathname === `/project/${item.id}`
-                          ? "bg-blue-100 text-blue-600"
-                          : "hover:bg-gray-100"
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  </div>
-                ))}
+                {projectData.flatMap(project => project.insightsList).map((item) => (
+  <div key={item.id} className="relative">
+    <div className="absolute left-[-14px] top-[50%] w-3 h-[2px] bg-gray-200"></div>
+    <Link
+      to={`/projects/${id}/insights/${item.id}`}
+      className={`block py-1 px-2 rounded ${
+        location.pathname === `/project/${item.id}`
+          ? "bg-blue-100 text-blue-600"
+          : "hover:bg-gray-100"
+      }`}
+    >
+      {item.name}
+    </Link>
+  </div>
+))}
+
               </div>
             )}
           </div>
@@ -87,13 +179,13 @@ const SideNav = ({ insights }) => {
             </button>
             {isWorkbookOpen && (
               <div className="ml-8 mt-1 relative">
-                {insights?.map((item) => (
-                  <div key={item.id} className="relative">
-                    <Link to={`/workbook/${item.id}`} className="block py-1 px-2 hover:bg-gray-100 rounded">
-                      {item.name} ({item.insights_workbook})
-                    </Link>
-                  </div>
-                ))}
+                {projectData.flatMap(project => project.projectInfo?.insights_workbook ?? []).map((item) => (
+  <div key={item.id} className="relative">
+    <Link to={`/projects/${id}/workbooks/${item.id}`} className="block py-1 px-2 hover:bg-gray-100 rounded">
+      {item.name}
+    </Link>
+  </div>
+))}
               </div>
             )}
           </div>
@@ -106,10 +198,10 @@ const SideNav = ({ insights }) => {
             </button>
             {isProductsOpen && (
               <div className="ml-8 mt-1 relative">
-                {insights?.map((item) => (
+                {projectData.flatMap(project => project.projectInfo).map((item) => (
                   <div key={item.id} className="relative">
                     <Link to={`/products/${item.id}`} className="block py-1 px-2 hover:bg-gray-100 rounded">
-                      {item.name} ({item.added_products})
+                     Product ({item.added_products})
                     </Link>
                   </div>
                 ))}

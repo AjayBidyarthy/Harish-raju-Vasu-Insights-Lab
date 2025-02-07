@@ -95,7 +95,7 @@ export function InsightsDetailPage() {
   return (
   
       <div className="flex min-h-screen bg-white">
-        <SideNav insights={projectData.map(project => project.projectInfo)}  />
+        <SideNav insights={projectData}  />
         <main className="flex-1">
         <InsightsInfo/>
         </main>
