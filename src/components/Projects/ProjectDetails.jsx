@@ -19,15 +19,16 @@ export function ProjectDetails() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [selectedProducts, setSelectedProducts] = useState([])
   const [filteredResults, setFilteredResults] = useState([])
-  const [products, setProducts] = useState([]) // Changed to state
+  const [products, setProducts] = useState([])
   const navigate = useNavigate();
+  const authToken = import.meta.env.VITE_AUTH_TOKEN;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await fetch('http://10.10.20.28:5017/v1.5/api/search/multi-query?aggregations=true&indexes=data_products&start=0&size=20&search_engine=normal_search&user_status=1', {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJpM3kxeElhQV9YNmtUMmZ3RjRLUU9pNWdQRmdaOEo3Q09xYmU3MVBpVm5FIn0.eyJleHAiOjE3Mzg5MDc3MDUsImlhdCI6MTczODgyMTMwNiwiYXV0aF90aW1lIjoxNzM4ODIwNzkyLCJqdGkiOiJiMzM5YWVjOS05ZmZmLTQxNGMtYWIyZC0yZjNlZjhmM2Y4ZTIiLCJpc3MiOiJodHRwczovLzEwLjEwLjIwLjI4Ojk0NDMvcmVhbG1zL2RleHRydXMiLCJhdWQiOiJkYXRhLW1hcmtldCIsInN1YiI6ImIzOGE2Mjk0LWFjYmUtNGE2Yi05NmVjLTc4ZWI4ZDgwM2IwMiIsInR5cCI6IklEIiwiYXpwIjoiZGF0YS1tYXJrZXQiLCJub25jZSI6IjY1ZWFkY2U1LTVkMzctNDM3MS1iNWMwLTYxYWE4OWU5Mzk1NyIsInNlc3Npb25fc3RhdGUiOiI2MmMzM2U1ZS0zMmQwLTRiZDktYTFhNy03YWVkMDNhNTY4NTkiLCJhdF9oYXNoIjoibzJLQms4TmN0VDVUdG42RlhIQmJudyIsImFjciI6IjEiLCJzaWQiOiI2MmMzM2U1ZS0zMmQwLTRiZDktYTFhNy03YWVkMDNhNTY4NTkiLCJpc0RmVXNlciI6dHJ1ZSwiaXNDb25zdW1lciI6dHJ1ZSwic3ViIjoiYmxhY2tjb2ZmZXJqb2JzQGdldHJpZ2h0ZGF0YS5jb206MSIsImNsaWVudElkIjoiMSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZ3NSb2xlcyI6WyJncy5kbV8oYmxhY2tjb2ZmZXJqb2JzJmdldHJpZ2h0ZGF0YS5jb20pIiwiZ3Muc3lzdGVtX2RlZmF1bHRfZnVuY3Rpb25zIl0sIm9ubHlEYXRhTWFya2V0QWxsb3dlZCI6dHJ1ZSwiaXNTdXBlckFkbWluIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYmxhY2tjb2ZmZXJqb2JzQGdldHJpZ2h0ZGF0YS5jb20iLCJnaXZlbl9uYW1lIjoiQmxhY2siLCJ1c2VyTmFtZSI6IkJsYWNrIiwidXNlcklkIjoiNTUwOTQ4MjgwMzQ0MTU0NjY0NSIsInV1aWQiOiJiMzhhNjI5NC1hY2JlLTRhNmItOTZlYy03OGViOGQ4MDNiMDIiLCJsaWNlbnNlVmFsaWQiOnRydWUsImhhc0xpY2Vuc2UiOnRydWUsIm5hbWUiOiJCbGFjayBDb2ZmZXIgSm9icyIsInVzZXJFbWFpbCI6ImJsYWNrY29mZmVyam9ic0BnZXRyaWdodGRhdGEuY29tIiwiYnVzaW5lc3NPd25lciI6ZmFsc2UsImZhbWlseV9uYW1lIjoiQ29mZmVyIEpvYnMiLCJlbWFpbCI6ImJsYWNrY29mZmVyam9ic0BnZXRyaWdodGRhdGEuY29tIn0.NCczBA4PAJ09TCuMqLPV5RQWALzCRepHrToyAmD98qOoORDptktKmJGax19erKuXO5sUpzuC-truy0zmxLF6NoojxgGJdTB4VOolYVUZTxt5VG-WpH7bsSQDCvVuaFHr8XLRF8iEMg0zaQfM-VPRTH7xUk6PnC5of70eF9MqGaMRv6Xy97vVGmDl97qgAc9GO3Fte2pauWDftQWjIfuWqlxS9yXzJD1FqXXs5qQzbARkdcOZKZx1dJWbLfrqSbkhVu6f-UrnPGMXa311ZG-lItyNIH-fg8AR0AefHyKXdgjdiUhwl5-KaXxK56GImZzAQBu8uHzn6KcLj02KbQgv9g',
+            "Authorization": `Bearer ${authToken}`,
             'Accept': 'application/json',
             'Access-Control-Allow-Origin': '*'
           }

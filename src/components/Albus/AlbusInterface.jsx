@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Share2, Maximize2, X, FileText, Code, Table, MessageSquare, RefreshCw } from "lucide-react";
+import { Share2, Maximize2, Save, X, FileText, Code, Table, MessageSquare, RefreshCw } from "lucide-react";
 import TextView from "../InsightsViewType/TextView";
 import CodeView from "../InsightsViewType/CodeView";
 import PromptView from "../InsightsViewType/PromptView";
@@ -8,6 +8,7 @@ import TableView from "../InsightsViewType/TableView";
 const AlbusInterface = () => {
   const [showMetadata, setShowMetadata] = useState(true);
   const [isFirstSubmit, setIsFirstSubmit] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [activeTab, setActiveTab] = useState("all");
   const [viewMode, setViewMode] = useState("text");
   const [prompt, setPrompt] = useState("");
@@ -205,6 +206,57 @@ const AlbusInterface = () => {
                     ) : (
                       <>
                         <div className="flex gap-1 mb-2 border rounded-md p-1 bg-white w-fit">
+                        <button 
+                onClick={() => setIsModalOpen(true)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <Save className="w-5 h-5" />
+              </button>
+
+<>
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg w-full max-w-md p-6 relative">
+            {/* Modal Header */}
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-semibold">Save Insight</h2>
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-700 mb-1">Insight Name</label>
+                <input 
+                  type="text"
+                  placeholder="Name"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+              </div>
+            
+              <div className="flex justify-end gap-3 mt-6">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-[#054CA0] text-white rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Save
+              </button>
+            </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
                           <button
                             className={getButtonStyles("text")}
                             onClick={() => setViewMode("text")}
@@ -229,6 +281,7 @@ const AlbusInterface = () => {
                           >
                             <MessageSquare className="w-4 h-4" />
                           </button>
+                          
                         </div>
                         {renderViewContent(message.content)}
                       </>
