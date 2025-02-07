@@ -34,8 +34,7 @@ export function ProjectDetails() {
         })
 
         const data = await response.json();
-        
-        // Extract displayNames from the response
+
         if (data.status === "success" && data.data && data.data.hits) {
           const displayNames = data.data.hits.map(item => item.displayName);
           setProducts(displayNames);
@@ -171,7 +170,7 @@ export function ProjectDetails() {
                 Cancel
               </button>
               <button
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="px-4 py-2 bg-[#054CA0] text-white rounded-md hover:bg-blue-700 transition-colors"
               >
                 Create
               </button>
