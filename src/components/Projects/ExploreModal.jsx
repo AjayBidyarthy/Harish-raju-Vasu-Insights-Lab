@@ -36,13 +36,6 @@ const ExploreModal = ({ isOpen, onClose }) => {
     setPrompt("");
   };
 
-  const getButtonStyles = (mode) => {
-    if (viewMode === mode) {
-      return "p-2 bg-gray-100 rounded-md";
-    }
-    return "p-2 hover:bg-gray-50 text-gray-400 transition-colors rounded-md";
-  };
-
   return (
     <div className="fixed inset-0 z-50">
       {/* Overlay */}
@@ -53,7 +46,7 @@ const ExploreModal = ({ isOpen, onClose }) => {
         <div className="h-[80vh] flex flex-col">
           {/* Header */}
           <div className="flex justify-between items-center p-6 border-b">
-            <h2 className="text-xl font-semibold">Explore and discover</h2>
+            <h2 className="text-xl font-semibold">What type of analysis are you planning to perform?</h2>
             <button 
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700"
@@ -78,31 +71,7 @@ const ExploreModal = ({ isOpen, onClose }) => {
                       </div>
                     ) : (
                       <>
-                        <div className="flex gap-1 mb-2 border rounded-md p-1 bg-white w-fit">
-                          <button
-                            className={getButtonStyles("text")}
-                            onClick={() => setViewMode("text")}
-                          >
-                            <FileText className="w-4 h-4" />
-                          </button>
-                          <button
-                            className={getButtonStyles("code")}
-                            onClick={() => setViewMode("code")}
-                          >
-                            <Code className="w-4 h-4" />
-                          </button>
-                          <button
-                            className={getButtonStyles("table")}
-                            onClick={() => setViewMode("table")}
-                          >
-                            <Table className="w-4 h-4" />
-                          </button>
-                          <button
-                            className={getButtonStyles("prompt")}
-                            onClick={() => setViewMode("prompt")}
-                          >
-                            <MessageSquare className="w-4 h-4" />
-                          </button>
+                        <div className="flex gap-1 mb-2 border rounded-md p-1 bg-white w-fit">                  
                         </div>
                         <div className="bg-gray-50 p-4 rounded-lg">
                           {message.content}
