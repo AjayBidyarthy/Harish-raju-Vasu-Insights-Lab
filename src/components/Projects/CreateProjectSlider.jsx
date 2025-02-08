@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { X, ChevronDown, Info } from "lucide-react";
-import ExploreModal from './ExploreModal';
+import { X, ChevronDown } from "lucide-react";
 
 const CreateProjectSlider = ({ isOpen, onClose, products, selectedProducts, onToggleProduct, openModal }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const removeProduct = (product) => {
+    onToggleProduct(product);
+  };
 
   return (
     <div 
@@ -72,15 +74,34 @@ const CreateProjectSlider = ({ isOpen, onClose, products, selectedProducts, onTo
               <div 
                 className="w-5 h-5 text-gray-400 hover:text-gray-600 cursor-pointer"
                 onClick={openModal}
-                >
+              >
                 <img 
-                    src="/assets/albus.png" 
-                    alt="Ask Albus" 
-                    className="w-full h-full object-contain rounded-full" 
+                  src="/assets/albus.png" 
+                  alt="Ask Albus" 
+                  className="w-full h-full object-contain rounded-full" 
                 />
-                </div>
+              </div>
             </div>
-          
+
+            {/* Product Tags */}
+            {selectedProducts.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {selectedProducts.map((product) => (
+                  <div
+                    key={product}
+                    className="flex items-center gap-1 px-2 py-1 bg-blue-50 text-blue-700 rounded-md text-sm"
+                  >
+                    <span>{product}</span>
+                    <button
+                      onClick={() => removeProduct(product)}
+                      className="hover:text-blue-900"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div>
