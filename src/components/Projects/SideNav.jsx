@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import { X } from 'lucide-react';
+import MainSection from "./MainSection";
+import CreateInsightModal from "./CreateInsightModal";
 
 const SideNav = ({ insights }) => {
   const [isInsightsOpen, setIsInsightsOpen] = useState(false);
   const [isWorkbookOpen, setIsWorkbookOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isCreateInsight, setIsCreateInsight]=useState(false)
   const location = useLocation();
   const { id } = useParams(); // Capture the project ID from the URL
   const navigate = useNavigate(); // Hook for programmatic navigation
@@ -151,6 +154,51 @@ const SideNav = ({ insights }) => {
             </button>
             {isInsightsOpen && (
               <div className="ml-8 mt-1 relative">
+                        <button 
+  className="w-auto flex items-center gap-1 p-1 text-xs text-white bg-[#054CA0] rounded mb-1"
+  onClick={() => setIsCreateInsight(true)}
+>
+  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+  </svg>
+  Create New Insight
+</button>
+<>
+      {isCreateInsight && (
+       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+       <div className="bg-white rounded-lg w-full max-w-6xl p-6 relative"> {/* Increased max-width */}
+         {/* Modal Header */}
+         <div className="flex justify-between items-center mb-6">
+           <h2 className="text-xl font-semibold">Create Insight</h2>
+           <button 
+             onClick={() => setIsCreateInsight(false)}
+             className="text-gray-500 hover:text-gray-700"
+           >
+             <X className="w-5 h-5" />
+           </button>
+         </div>
+     
+         {/* Replace the current content with MainSection */}
+         <CreateInsightModal/>
+     
+         {/* Keep the action buttons */}
+         <div className="flex justify-end gap-3 mt-6">
+           <button
+             onClick={() => setIsCreateInsight(false)}
+             className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+           >
+             Cancel
+           </button>
+           <button
+             className="px-4 py-2 bg-[#054CA0] text-white rounded-md hover:bg-blue-700 transition-colors"
+           >
+             Create
+           </button>
+         </div>
+       </div>
+     </div>
+      )}
+    </>
                 <div className="absolute left-[-14px] top-0 bottom-0 w-[2px] bg-gray-200"></div>
                 {projectData.flatMap(project => project.insightsList).map((item) => (
   <div key={item.id} className="relative">
@@ -242,11 +290,7 @@ const SideNav = ({ insights }) => {
       )}
     </>
 
-
-               
-
-          
-
+   
 
                 {projectData.flatMap(project => project.projectInfo?.insights_workbook ?? []).map((item) => (
   <div key={item.id} className="relative">

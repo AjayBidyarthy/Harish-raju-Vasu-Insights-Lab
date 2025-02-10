@@ -1,10 +1,10 @@
 import { useParams, Link } from "react-router-dom";
-import { InsightsOptionCard } from "./InsightsOptionCard";
+import { ProductCard } from "../LandingPage/ProductCard";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const MainSection = ({ insights }) => {
-  const { id } = useParams();
+const CreateInsightModal = ({ insights }) => {
+ 
   const containerRef = useRef(null);
   const [lines, setLines] = useState([]);
   const navigate = useNavigate();
@@ -70,22 +70,16 @@ const MainSection = ({ insights }) => {
     return () => window.removeEventListener('resize', updateLines);
   }, []);
 
-  if (id) {
-    const project = insights?.find((p) => p.id === Number(id));
-    if (!project) {
-      return <div className="p-6">Project not found</div>;
-    }
-  }
 
   return (
     <main className="flex-1 p-6 bg-white overflow-auto">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h2 className="text-lg font-poppins">Use one of these three options to create an insight:</h2>
+          <h2 className="text-lg">Supplychain Analysis</h2>
         </div>
 
         <div className="relative" ref={containerRef}>
-      
+          {/* SVG Lines Layer */}
           <svg 
             className="absolute inset-0 pointer-events-none" 
             style={{ width: '100%', height: '100%' }}
@@ -104,13 +98,15 @@ const MainSection = ({ insights }) => {
             ))}
           </svg>
 
+          {/* Product Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {productData.map((product, index) => (
               <div key={index} className="product-card">
-                <InsightsOptionCard
+                <ProductCard
                   icon={product.icon}
                   title={product.title}
                   description={product.description}
+                  onOpen={product.onOpen}
                 />
               </div>
             ))}
@@ -121,4 +117,4 @@ const MainSection = ({ insights }) => {
   );
 };
 
-export default MainSection;
+export default CreateInsightModal
