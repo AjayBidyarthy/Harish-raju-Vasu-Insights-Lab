@@ -17,12 +17,12 @@ export const DataProducts = () => {
 
   const fetchDataProducts = async () => {
     try {
-      const response = await fetch('http://10.10.20.28:5017/v1.5/api/search/multi-query?aggregations=true&indexes=data_products&start=0&size=20&search_engine=normal_search&user_status=1', {
-        headers: {
-          "Authorization": `Bearer ${authToken}`,
-          'Access-Control-Allow-Origin': '*'
-        }
-      })
+   const response = await fetch('/api/v1.5/api/search/multi-query?aggregations=true&indexes=data_products&start=0&size=20&search_engine=normal_search&user_status=1', {
+  headers: {
+    "Authorization": `Bearer ${authToken}`,
+  }
+});
+
       const data = await response.json()
       if (data.status === "success") {
         setProducts(data.data.hits)
