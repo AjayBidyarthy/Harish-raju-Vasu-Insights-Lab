@@ -7,6 +7,7 @@ import { Projects } from './pages/Projects';
 import PageProject from './pages/PageProject';
 import { Insights } from './pages/Insights';
 import { InsightsDetail } from './pages/InsightsDetail';
+import { WorkbookDetail } from './pages/WorkbookDetail';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/albus" element={<AskAlbus/>} />
         <Route path="/projects/:id/insights" element={<Insights />} />
         <Route path="/projects/:id/insights/:insightId" element={<InsightsDetail />} />
+        <Route path="/projects/:id/workbooks/:workbookId" element={<WorkbookDetail/>} />
       </Routes>
     </Router>
   );
