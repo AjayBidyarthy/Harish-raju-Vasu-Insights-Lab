@@ -1,9 +1,9 @@
 import { ChevronRight, Grid, LayoutGrid, Search, X, Plus, ChevronDown } from "lucide-react"
 import { useState, useEffect } from "react"
 import FilterSidebar from "../DataProducts/FilterSidebar"
-import CreateProjectSlider from "./CreateProjectSlider";
 import { useNavigate } from "react-router-dom";
 import ExploreModal from "./ExploreModal";
+import CreateProjectPanel from "./CreateProjectSlider";
 
 const insights = [
   { id: 1, name: "Project 1", insights: 10, insights_workbook: 5, added_products: 5 },
@@ -23,6 +23,7 @@ export function ProjectDetails() {
   const [filteredResults, setFilteredResults] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [products, setProducts] = useState([])
+  const [projectName, setProjectName] = useState("");
   const navigate = useNavigate();
   const authToken = import.meta.env.VITE_AUTH_TOKEN;
 
@@ -64,6 +65,21 @@ export function ProjectDetails() {
   return (
     <div className="p-4 font-poppins bg-white">
       <div className="flex justify-between items-center mb-4">
+      <CreateProjectPanel
+          isOpen={isCreateOpen}
+          onClose={() => setIsCreateOpen(false)}
+          products={products}
+          selectedProducts={selectedProducts}
+          onToggleProduct={toggleProduct}
+          openModal={() => setIsModalOpen(true)}
+          projectName={projectName}
+          setProjectName={setProjectName}
+        />
+ <ExploreModal 
+            isOpen={isModalOpen} 
+            onClose={() => setIsModalOpen(false)} 
+            projectName={projectName}
+          />
         <div className="relative flex space-x-6 border-b md:ml-6">
           <button
             className={`relative pb-2 text-sm font-medium ${activeTab === "all" ? "text-[#1a73e8]" : "text-gray-600"}`}
@@ -118,18 +134,7 @@ export function ProjectDetails() {
         />
 
         {/* Create Project Slider */}
-        <CreateProjectSlider 
-          isOpen={isCreateOpen}
-          onClose={() => setIsCreateOpen(false)}
-          products={products}
-          selectedProducts={selectedProducts}
-          onToggleProduct={toggleProduct}
-          openModal={() => setIsModalOpen(true)}
-        />
- <ExploreModal 
-            isOpen={isModalOpen} 
-            onClose={() => setIsModalOpen(false)} 
-            />
+      
         {/* Main Content Area */}
         <div className={`transition-all duration-300 ${isFilterOpen ? "ml-80" : "ml-0"} ${isCreateOpen ? "mr-96" : "mr-0"}`}>
           {isGridView ? (

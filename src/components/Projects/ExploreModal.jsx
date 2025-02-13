@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { X, FileText, Code, Table, MessageSquare, Share2, Maximize2 } from "lucide-react";
 
-const ExploreModal = ({ isOpen, onClose }) => {
+const ExploreModal = ({ isOpen, onClose, projectName }) => {
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState([]);
   const [viewMode, setViewMode] = useState("text");
+  const [showInput, setShowInput] = useState(true);
 
   if (!isOpen) return null;
 
@@ -16,6 +17,8 @@ const ExploreModal = ({ isOpen, onClose }) => {
       minute: '2-digit' 
     });
     
+    const aiResponse = `For ${prompt}, following data products seem to be relevant for your project "${projectName || 'Project Title'}": Product 1, Product 2, etc...`;
+    
     setMessages([
       ...messages, 
       {
@@ -25,7 +28,7 @@ const ExploreModal = ({ isOpen, onClose }) => {
       },
       {
         type: 'ai',
-        content: `Response to: ${prompt}`,
+        content: aiResponse,
         timestamp: new Date().toLocaleTimeString([], { 
           hour: '2-digit', 
           minute: '2-digit' 
@@ -34,19 +37,22 @@ const ExploreModal = ({ isOpen, onClose }) => {
     ]);
     
     setPrompt("");
+    setShowInput(false);
+  };
+
+  const handleRepeat = () => {
+    setPrompt("");
+    setMessages([]);
+    setShowInput(true);
   };
 
   return (
     <div className="fixed inset-0 z-50">
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      
-      {/* Modal */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl bg-white rounded-lg shadow-xl">
         <div className="h-[80vh] flex flex-col">
-          {/* Header */}
           <div className="flex justify-between items-center p-6 border-b">
-            <h2 className="text-xl font-semibold">What type of analysis are you planning to perform?</h2>
+            <h2 className="text-xl font-semibold">Recommend Relevant Products</h2>
             <button 
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700"
@@ -55,8 +61,8 @@ const ExploreModal = ({ isOpen, onClose }) => {
             </button>
           </div>
 
-          {/* Chat Content */}
           <div className="flex-1 overflow-y-auto p-6">
+          <p className="">What type of analysis you want to perform in the project "{projectName || 'Project Title'}"?</p><br/>
             {messages.map((message, index) => (
               <div key={index} className="mb-4">
                 <div className="flex items-start gap-2">
@@ -71,11 +77,17 @@ const ExploreModal = ({ isOpen, onClose }) => {
                       </div>
                     ) : (
                       <>
-                        <div className="flex gap-1 mb-2 border rounded-md p-1 bg-white w-fit">                  
-                        </div>
                         <div className="bg-gray-50 p-4 rounded-lg">
-                          {message.content}
-                        </div>
+                        <pre className="whitespace-pre-wrap font-mono text-sm">{message.content}</pre>
+                      </div>
+                        <div className="flex gap-3 mb-2 rounded-md p-2 bg-white w-fit">
+                            <button className="px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                              Add Products
+                            </button>
+                            <button className="px-5 py-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors text-sm font-medium" onClick={handleRepeat}>
+                              Repeat
+                            </button>
+                          </div>
                       </>
                     )}
                   </div>
@@ -93,23 +105,25 @@ const ExploreModal = ({ isOpen, onClose }) => {
           </div>
 
           {/* Input Area */}
-          <div className="p-6 border-t">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                className="flex-grow border rounded-lg p-3"
-                placeholder="Type your prompt here"
-              />
-              <button 
-                onClick={handleSubmit}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-              >
-                Submit
-              </button>
+          {showInput && (
+            <div className="p-6 border-t">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  className="flex-grow border rounded-lg p-3"
+                  placeholder="Type your prompt here"
+                />
+                <button 
+                  onClick={handleSubmit}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Submit
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
