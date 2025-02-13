@@ -178,23 +178,7 @@ const SideNav = ({ insights }) => {
            </button>
          </div>
      
-         {/* Replace the current content with MainSection */}
          <CreateInsightModal/>
-     
-         {/* Keep the action buttons */}
-         <div className="flex justify-end gap-3 mt-6">
-           <button
-             onClick={() => setIsCreateInsight(false)}
-             className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
-           >
-             Cancel
-           </button>
-           <button
-             className="px-4 py-2 bg-[#054CA0] text-white rounded-md hover:bg-blue-700 transition-colors"
-           >
-             Create
-           </button>
-         </div>
        </div>
      </div>
       )}
