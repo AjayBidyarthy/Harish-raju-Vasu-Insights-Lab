@@ -273,9 +273,12 @@
             .actions {
               display: flex;
               justify-content: flex-end;
+
   
               button {
                 color: #2563eb;
+                border: none;
+                background-color: transparent;
   
                 &:hover {
                   text-decoration: underline;

@@ -42,6 +42,9 @@
   
       button {
         color: #6b7280;
+        border:none;
+        background-color: transparent;
+        cursor: pointer;
         &:hover {
           color: #374151;
         }

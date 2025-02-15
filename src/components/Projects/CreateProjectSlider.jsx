@@ -37,7 +37,9 @@ const CreateProjectPanel = ({ isOpen, onClose, products, selectedProducts, onTog
             </div>
 
             <div className="create-project-panel__field">
-              <label>Add Subscribed Products</label>
+              <div className="create-project-panel__label-row">
+                <label>Add Subscribed Products</label>
+              </div>
               <div className="create-project-panel__field-row">
                 <div className="create-project-panel__product-selector">
                   <button
@@ -67,7 +69,6 @@ const CreateProjectPanel = ({ isOpen, onClose, products, selectedProducts, onTog
                     </div>
                   )}
                 </div>
-                
                 <div className="create-project-panel__albus-button" onClick={openModal}>
                   <img 
                     src="/assets/albus.png" 
