@@ -9,13 +9,15 @@ import "./AlbusInterface.scss"
 const AlbusInterface = () => {
   const [showMetadata, setShowMetadata] = useState(true);
   const [isFirstSubmit, setIsFirstSubmit] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
   const [viewMode, setViewMode] = useState("text");
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState([]);
   const [timeframe, setTimeframe] = useState("Timeframe");
   const [page, setPage] = useState("Page");
+  const [insightName, setInsightName] = useState("");
+  const [insightDescription, setInsightDescription] = useState("");
 
   const metadata = [
     {
@@ -100,6 +102,13 @@ const AlbusInterface = () => {
       default:
         return null;
     }
+  };
+
+  const handleSaveInsight = () => {
+    console.log('Saving insight:', { insightName, insightDescription });
+    setIsModalOpen(false);
+    setInsightName("");
+    setInsightDescription("");
   };
 
   return (
@@ -320,6 +329,55 @@ const AlbusInterface = () => {
         </div>
       )}
     </div>
+
+    {isModalOpen && (
+      <div className="modal">
+        <div className="modal__content">
+          <div className="modal__header">
+            <h2>Save Insight</h2>
+            <button onClick={() => setIsModalOpen(false)} className="modal__close">
+              <X className="modal__close-icon" />
+            </button>
+          </div>
+          <div className="modal__form">
+            <div>
+              <label htmlFor="insightName">Insight Name</label>
+              <input
+                id="insightName"
+                type="text"
+                value={insightName}
+                onChange={(e) => setInsightName(e.target.value)}
+                placeholder="Enter insight name"
+              />
+            </div>
+            <div>
+              <label htmlFor="insightDescription">Description</label>
+              <input
+                id="insightDescription"
+                type="text"
+                value={insightDescription}
+                onChange={(e) => setInsightDescription(e.target.value)}
+                placeholder="Enter insight description"
+              />
+            </div>
+          </div>
+          <div className="modal__actions">
+            <button 
+              className="cancel"
+              onClick={() => setIsModalOpen(false)}
+            >
+              Cancel
+            </button>
+            <button 
+              className="save"
+              onClick={handleSaveInsight}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
   </div>
   );
 };
