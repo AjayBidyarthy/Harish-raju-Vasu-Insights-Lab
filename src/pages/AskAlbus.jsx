@@ -11,7 +11,7 @@ export function AskAlbus() {
       <Header />
       <div className="content">
         <Sidebar />
-        <div className="main-content">
+        <div className="main-content2">
           <Toolbar/>
           <AlbusInterface/>
         </div>

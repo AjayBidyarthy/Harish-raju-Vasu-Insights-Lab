@@ -41,6 +41,8 @@ $orange-500: #f97316;
     padding-bottom: 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
+    border:none;
+    background-color: transparent;
     
     &--active {
       color: $primary-color;
@@ -92,6 +94,7 @@ $orange-500: #f97316;
   &__buttons {
     display: flex;
     gap: 0.5rem;
+    
   }
 
   &__button {
@@ -99,6 +102,8 @@ $orange-500: #f97316;
     height: 3.5rem;
     @include flex-center;
     padding: 1rem;
+    border:none;
+    background-color: transparent;
 
     img {
       width: 100%;
@@ -115,6 +120,7 @@ $orange-500: #f97316;
 // Message Section
 .message-section {
   margin-bottom: 2rem;
+  
 
   &__header {
     margin-bottom: 1rem;
@@ -153,7 +159,7 @@ $orange-500: #f97316;
     }
 
     &--ai {
-      background-color: white;
+      background-color: rgb(184, 42, 42);
     }
   }
 
@@ -182,7 +188,8 @@ $orange-500: #f97316;
 
   &__action-button {
     padding: 0.5rem;
-    border-radius: 0.5rem;
+    border:none;
+    background-color: transparent;
 
     &:hover {
       background-color: $gray-100;
@@ -200,15 +207,14 @@ $orange-500: #f97316;
   display: flex;
   gap: 0.25rem;
   margin-bottom: 0.5rem;
-  border: 1px solid $gray-200;
-  border-radius: 0.375rem;
   padding: 0.25rem;
   background-color: white;
   width: fit-content;
 
+
   &__button {
     padding: 0.5rem;
-    border-radius: 0.375rem;
+   border:none;
     
     &:hover {
       background-color: $gray-100;
@@ -256,13 +262,15 @@ $orange-500: #f97316;
     display: flex;
     justify-content: flex-end;
     margin-top: 1rem;
+    cursor: pointer;
   }
 
   &__button {
     padding: 0.5rem 1rem;
     background-color: $blue-700;
     color: white;
-    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
     
     &:hover {
       background-color: darken($blue-700, 5%);
@@ -453,5 +461,30 @@ $orange-500: #f97316;
       &__button {
         width: 100%;
       }
+    }
+  }
+  .view-content {
+    &--text {
+      background-color: $gray-50;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+  
+    &--code {
+      background-color: $gray-50;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+  
+    &--table {
+      background-color: $gray-50;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+  
+    &--prompt {
+      background-color: $gray-50;
+      padding: 1rem;
+      border-radius: 0.5rem;
     }
   }

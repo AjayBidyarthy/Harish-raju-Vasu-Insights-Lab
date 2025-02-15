@@ -38,13 +38,6 @@ const AlbusInterface = () => {
     }
   ];
 
-  const getButtonStyles = (mode) => {
-    if (viewMode === mode) {
-      return "p-2 bg-gray-100 rounded-md";
-    }
-    return "p-2 hover:bg-gray-50 text-gray-400 transition-colors rounded-md";
-  };
-
   const handleSubmit = () => {
     if (!prompt.trim()) return;
     
@@ -82,26 +75,26 @@ const AlbusInterface = () => {
     switch (viewMode) {
       case "text":
         return (
-          <div className="bg-gray-50 p-4 rounded-lg">
-          <TextView/> 
+          <div className="view-content view-content--text">
+            <TextView /> 
           </div>
         );
       case "code":
         return (
-          <div className="bg-gray-50 p-4 rounded-lg">
-           <CodeView/>
+          <div className="view-content view-content--code">
+            <CodeView />
           </div>
         );
       case "table":
         return (
-          <div className="bg-gray-50 p-4 rounded-lg">
-           <TableView/>
+          <div className="view-content view-content--table">
+            <TableView />
           </div>
         );
       case "prompt":
         return (
-          <div className="bg-gray-50 p-4 rounded-lg">
-           <PromptView/>
+          <div className="view-content view-content--prompt">
+            <PromptView />
           </div>
         );
       default:
