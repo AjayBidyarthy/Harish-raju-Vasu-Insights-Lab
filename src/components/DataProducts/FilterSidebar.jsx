@@ -1,4 +1,4 @@
-import { Search, X } from "lucide-react"
+import { Search, X } from 'lucide-react'
 import { useState, useEffect } from "react"
 
 const FilterSidebar = ({ isOpen, onClose, onFilterChange }) => {
@@ -16,12 +16,10 @@ const FilterSidebar = ({ isOpen, onClose, onFilterChange }) => {
     { label: "Pending", value: 4 }
   ]
 
-  // Fetch and filter data when filters change
   useEffect(() => {
     fetchAndFilterData()
   }, [selectedSensitivities, selectedApprovalStates])
 
-  // Apply filters whenever search term or API data changes
   useEffect(() => {
     applyFilters()
   }, [searchTerm, apiData])
@@ -62,7 +60,6 @@ const FilterSidebar = ({ isOpen, onClose, onFilterChange }) => {
           }
         );
         
-      
       const data = await response.json()
       
       if (data.status === "success") {
@@ -76,14 +73,12 @@ const FilterSidebar = ({ isOpen, onClose, onFilterChange }) => {
   const applyFilters = () => {
     let filteredProducts = [...apiData]
     
-    // Apply sensitivity filter if any selected
     if (selectedSensitivities.length > 0) {
       filteredProducts = filteredProducts.filter(product => 
         selectedSensitivities.includes(product.dataProductSensitivity)
       )
     }
     
-    // Apply domain name search if search term exists
     if (searchTerm) {
       filteredProducts = filteredProducts.filter(product => 
         product.domainName.toLowerCase().includes(searchTerm)
@@ -94,62 +89,56 @@ const FilterSidebar = ({ isOpen, onClose, onFilterChange }) => {
   }
 
   return (
-    <div
-      className={`absolute top-0 left-0 h-full w-80 border-r transform transition-transform duration-300 ease-in-out ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      }`}
-    >
+    <div className={`filter-sidebar ${isOpen ? 'open' : ''}`}>
       {isOpen && (
-        <div className="p-4">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-lg font-semibold">Filters</h2>
-            <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded-full">
-              <X className="w-5 h-5" />
+        <div className="sidebar-content">
+          <div className="sidebar-header">
+            <h2>Filters</h2>
+            <button onClick={onClose} className="close-button">
+              <X />
             </button>
           </div>
 
-          <div className="mb-6">
-            <div className="relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <div className="search-container">
+            <div className="search-input-wrapper">
+              <Search className="search-icon" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={handleSearch}
                 placeholder="Search domain"
-                className="w-full pl-9 pr-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="search-input"
               />
             </div>
           </div>
 
-          <div className="mb-6">
-            <h3 className="text-sm font-medium mb-3">Approval State</h3>
-            <div className="space-y-2">
+          <div className="filter-section">
+            <h3>Approval State</h3>
+            <div className="checkbox-group">
               {approvalStates.map((state) => (
-                <label key={state.label} className="flex items-center">
+                <label key={state.label} className="checkbox-label">
                   <input
                     type="checkbox"
-                    className="rounded border-gray-300 mr-2"
                     checked={selectedApprovalStates.includes(state.value)}
                     onChange={() => handleApprovalStateChange(state.value)}
                   />
-                  <span className="text-sm">{state.label}</span>
+                  <span>{state.label}</span>
                 </label>
               ))}
             </div>
           </div>
 
-          <div className="mb-6">
-            <h3 className="text-sm font-medium mb-3">Data Sensitivity</h3>
-            <div className="space-y-2">
+          <div className="filter-section">
+            <h3>Data Sensitivity</h3>
+            <div className="checkbox-group">
               {sensitivities.map((sensitivity) => (
-                <label key={sensitivity} className="flex items-center">
+                <label key={sensitivity} className="checkbox-label">
                   <input
                     type="checkbox"
-                    className="rounded border-gray-300 mr-2"
                     checked={selectedSensitivities.includes(sensitivity)}
                     onChange={() => handleSensitivityChange(sensitivity)}
                   />
-                  <span className="text-sm">{sensitivity}</span>
+                  <span>{sensitivity}</span>
                 </label>
               ))}
             </div>

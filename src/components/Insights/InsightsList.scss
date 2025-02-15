@@ -1,0 +1,86 @@
+$primary-color: #2563eb; 
+$primary-hover: #1e40af;
+$background-color: #f9fafb;
+$text-color: #374151; 
+
+.insights-list {
+  padding: 1.5rem;
+  background-color: white;
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+   
+    .back-button {
+      display: flex;
+      align-items: center;
+      color: black;
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        color: $primary-hover;
+      }
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .table-container {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      
+      thead {
+        background: $background-color;
+        color: #6b7280;
+        font-size: 0.875rem;
+        text-align: left;
+
+        th {
+          padding: 1rem;
+          border-bottom: 1px solid #e5e7eb;
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid #e5e7eb;
+
+          &:hover {
+            background: #f3f4f6;
+          }
+
+          td {
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: $text-color;
+          }
+
+          .view-button {
+            color: $primary-color;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+
+            &:hover {
+              color: $primary-hover;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,16 +2,17 @@ import { Header } from "../components/LandingPage/Header";
 import { Sidebar } from "../components/LandingPage/Sidebar";
 import { Toolbar } from "../components/LandingPage/Toolbar";
 import { MainContent } from "../components/LandingPage/MainContent";
+import "./LandingPage.scss";
 
- export function LandingPage() {
+export function LandingPage() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="landing-page">
       <Header />
-      <div className="flex flex-1">
+      <div className="content">
         <Sidebar />
-        <div className="flex-1 flex flex-col bg-[#F8F8F8]">
+        <div className="main-content">
           <Toolbar />
-          <MainContent/>
+          <MainContent />
         </div>
       </div>
     </div>

@@ -3,16 +3,17 @@ import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import { X } from 'lucide-react';
 import MainSection from "./MainSection";
 import CreateInsightModal from "./CreateInsightModal";
+import './SideNav.scss';
 
 const SideNav = ({ insights }) => {
   const [isInsightsOpen, setIsInsightsOpen] = useState(false);
   const [isWorkbookOpen, setIsWorkbookOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isCreateInsight, setIsCreateInsight]=useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateInsight, setIsCreateInsight] = useState(false);
   const location = useLocation();
-  const { id } = useParams(); // Capture the project ID from the URL
-  const navigate = useNavigate(); // Hook for programmatic navigation
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const projectData = [
     {
@@ -111,7 +112,6 @@ const SideNav = ({ insights }) => {
       ]
     }
   ];
-  
 
   const handleInsightsClick = () => {
     setIsInsightsOpen(!isInsightsOpen);
@@ -124,181 +124,158 @@ const SideNav = ({ insights }) => {
   };
 
   const ToggleIcon = ({ isOpen }) => (
-    <span className="inline-block w-4 h-4 mr-2 text-gray-600 font-medium border border-gray-400 rounded flex items-center justify-center text-sm leading-none">
+    <span className={`toggle-icon ${isOpen ? 'open' : ''}`}>
       {isOpen ? "−" : "+"}
     </span>
   );
+
   return (
-    <nav className="w-64 min-h-screen border-r border-gray-200 bg-white">
-      <div className="p-4">
-        <div className="flex items-center gap-2 mb-4">
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <nav className="side-nav">
+      <div className="nav-container">
+        <div className="header">
+          <svg className="folder-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
           </svg>
-          <h2 className="text-lg">Supplychain Analysis</h2>
+          <p>Supplychain Analysis</p>
         </div>
 
-        <div className="space-y-2 relative">
-          <div className="absolute left-2 top-6 bottom-6 w-[2px] bg-gray-200"></div>
+        <div className="nav-sections">
+          <div className="vertical-line"></div>
 
-          {/* Insights Section */}
-          <div className="mb-2 relative">
-            <div className="absolute left-2 top-3 w-4 h-[2px] bg-gray-200"></div>
+          <div className="section">
+            <div className="horizontal-line"></div>
             <button
               onClick={handleInsightsClick}
               onDoubleClick={handleInsightsDoubleClick}
-              className="flex items-center w-full text-left pl-6"
+              className="section-button"
             >
               <ToggleIcon isOpen={isInsightsOpen} />
               <span>Insights (5)</span>
             </button>
+            
             {isInsightsOpen && (
-              <div className="ml-8 mt-1 relative">
-                        <button 
-  className="w-auto flex items-center gap-1 p-1 text-xs text-white bg-[#054CA0] rounded mb-1"
-  onClick={() => setIsCreateInsight(true)}
->
-  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-  </svg>
-  Create New Insight
-</button>
-<>
-      {isCreateInsight && (
-       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-       <div className="bg-white rounded-lg w-full max-w-6xl p-6 relative"> {/* Increased max-width */}
-         {/* Modal Header */}
-         <div className="flex justify-between items-center mb-6">
-           <h2 className="text-xl font-semibold">Create Insight</h2>
-           <button 
-             onClick={() => setIsCreateInsight(false)}
-             className="text-gray-500 hover:text-gray-700"
-           >
-             <X className="w-5 h-5" />
-           </button>
-         </div>
-     
-         <CreateInsightModal/>
-       </div>
-     </div>
-      )}
-    </>
-                <div className="absolute left-[-14px] top-0 bottom-0 w-[2px] bg-gray-200"></div>
-                {projectData.flatMap(project => project.insightsList).map((item) => (
-  <div key={item.id} className="relative">
-    <div className="absolute left-[-14px] top-[50%] w-3 h-[2px] bg-gray-200"></div>
-    <Link
-      to={`/projects/${id}/insights/${item.id}`}
-      className={`block py-1 px-2 rounded ${
-        location.pathname === `/project/${item.id}`
-          ? "bg-blue-100 text-blue-600"
-          : "hover:bg-gray-100"
-      }`}
-    >
-      {item.name}
-    </Link>
-  </div>
-))}
+              <div className="section-content">
+                <button 
+                  className="create-button"
+                  onClick={() => setIsCreateInsight(true)}
+                >
+                  <svg className="plus-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  Create New Insight
+                </button>
 
+                {isCreateInsight && (
+                  <div className="modal-overlay">
+                    <div className="modal-container">
+                      <div className="modal-header">
+                        <h2>Create Insight</h2>
+                        <button 
+                          onClick={() => setIsCreateInsight(false)}
+                          className="close-button"
+                        >
+                          <X />
+                        </button>
+                      </div>
+                      <CreateInsightModal/>
+                    </div>
+                  </div>
+                )}
+
+                <div className="content-line"></div>
+                {projectData.flatMap(project => project.insightsList).map((item) => (
+                  <div key={item.id} className="list-item">
+                    <div className="item-line"></div>
+                    <Link
+                      to={`/projects/${id}/insights/${item.id}`}
+                      className={location.pathname === `/project/${item.id}` ? 'active' : ''}
+                    >
+                      {item.name}
+                    </Link>
+                  </div>
+                ))}
               </div>
             )}
           </div>
 
           {/* Insights Workbook Section */}
-          <div className="mb-2 relative">
-            <button onClick={() => setIsWorkbookOpen(!isWorkbookOpen)} className="flex items-center w-full text-left pl-6">
+          <div className="section">
+            <button onClick={() => setIsWorkbookOpen(!isWorkbookOpen)} className="section-button">
               <ToggleIcon isOpen={isWorkbookOpen} />
               <span>Insights Workbook (20)</span>
             </button>
+            
             {isWorkbookOpen && (
-              <div className="ml-8 mt-1 relative">
-           <button 
-  className="w-auto flex items-center gap-1 p-1 text-xs text-white bg-[#054CA0] rounded mb-1"
-  onClick={() => setIsModalOpen(true)}
->
-  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-  </svg>
-  Create New Workbook
-</button>
+              <div className="section-content">
+                <button 
+                  className="create-button"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <svg className="plus-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  Create New Workbook
+                </button>
 
-<>
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-full max-w-md p-6 relative">
-            {/* Modal Header */}
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold">Create Insight Workbook</h2>
-              <button 
-                onClick={() => setIsModalOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm text-gray-700 mb-1">Title Name</label>
-                <input 
-                  type="text"
-                  placeholder="Title Name"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-700 mb-1">Description</label>
-                <input 
-                  type="text"
-                  placeholder="Description"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                />
-              </div>
-              <div className="flex justify-end gap-3 mt-6">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-[#054CA0] text-white rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Create
-              </button>
-            </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-
-   
+                {isModalOpen && (
+                  <div className="modal-overlay">
+                    <div className="modal-container workbook">
+                      <div className="modal-header">
+                        <h2>Create Insight Workbook</h2>
+                        <button 
+                          onClick={() => setIsModalOpen(false)}
+                          className="close-button"
+                        >
+                          <X />
+                        </button>
+                      </div>
+                      
+                      <div className="modal-content">
+                        <div className="form-group">
+                          <label>Title Name</label>
+                          <input type="text" placeholder="Title Name" />
+                        </div>
+                        <div className="form-group">
+                          <label>Description</label>
+                          <input type="text" placeholder="Description" />
+                        </div>
+                        <div className="button-group">
+                          <button onClick={() => setIsModalOpen(false)} className="cancel-button">
+                            Cancel
+                          </button>
+                          <button className="create-action-button">
+                            Create
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {projectData.flatMap(project => project.projectInfo?.insights_workbook ?? []).map((item) => (
-  <div key={item.id} className="relative">
-    <Link to={`/projects/${id}/workbooks/${item.id}`} className="block py-1 px-2 hover:bg-gray-100 rounded">
-      {item.name}
-    </Link>
-  </div>
-))}
+                  <div key={item.id} className="list-item">
+                    <Link to={`/projects/${id}/workbooks/${item.id}`}>
+                      {item.name}
+                    </Link>
+                  </div>
+                ))}
               </div>
             )}
           </div>
 
           {/* Products Section */}
-          <div className="mb-2 relative">
-            <button onClick={() => setIsProductsOpen(!isProductsOpen)} className="flex items-center w-full text-left pl-6">
+          <div className="section">
+            <button onClick={() => setIsProductsOpen(!isProductsOpen)} className="section-button">
               <ToggleIcon isOpen={isProductsOpen} />
               <span>Products (10)</span>
             </button>
+            
             {isProductsOpen && (
-              <div className="ml-8 mt-1 relative">
+              <div className="section-content">
                 {projectData.flatMap(project => project.projectInfo).map((item) => (
-                  <div key={item.id} className="relative">
-                    <Link to={`/products/${item.id}`} className="block py-1 px-2 hover:bg-gray-100 rounded">
-                     Product ({item.added_products})
+                  <div key={item.id} className="list-item">
+                    <Link to={`/products/${item.id}`}>
+                      Product ({item.added_products})
                     </Link>
                   </div>
                 ))}

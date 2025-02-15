@@ -1,0 +1,14 @@
+.insights-page {
+    display: flex;
+    min-height: 100vh;
+    background-color: white;
+  
+    .side-nav {
+      flex: 0 0 auto; // Adjust as needed for sidebar width
+    }
+  
+    .main-content {
+      flex: 1;
+    }
+  }
+  

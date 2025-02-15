@@ -1,0 +1,45 @@
+$background-color: #f8f8f8;
+$primary-color: #2563eb; 
+$primary-hover: #1e40af; 
+
+.search-bar {
+  display: flex;
+  width: 100%;
+  max-width: 28rem; 
+  background-color: $background-color;
+  margin: 0 auto;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  .search-input {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db; 
+    border-radius: 0.375rem;
+    outline: none;
+
+    &:focus {
+      border-color: transparent;
+      box-shadow: 0 0 0 2px $primary-color;
+    }
+  }
+
+  .search-button {
+    padding: 0.5rem 1rem;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $primary-hover;
+    }
+
+    .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+}

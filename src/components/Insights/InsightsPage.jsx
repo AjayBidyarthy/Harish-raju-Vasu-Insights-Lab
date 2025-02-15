@@ -1,6 +1,7 @@
 
 import SideNav from "../Projects/SideNav";
 import InsightsList from "./InsightsList";
+import "./InsightsPage.scss"
 
 // export const insights1 = [
 //   { id: 1, name: "Project 1", insights: 10, insights_workbook: 5, added_products: 5 },
@@ -90,15 +91,14 @@ import InsightsList from "./InsightsList";
     }
   ];
 
-export function InsightsPage() {
-  return (
-  
-      <div className="flex min-h-screen bg-white">
-        <SideNav insights={projectData.map(project => project.projectInfo)}  />
-        <main className="flex-1">
-        <InsightsList insights={projectData.flatMap(project => project.insightsList)} />
+  export function InsightsPage() {
+    return (
+      <div className="insights-page">
+        <SideNav insights={projectData.map(project => project.projectInfo)} className="side-nav" />
+        <main className="main-content">
+          <InsightsList insights={projectData.flatMap(project => project.insightsList)} />
         </main>
       </div>
-    
-  );
-}
+    );
+  }
+  

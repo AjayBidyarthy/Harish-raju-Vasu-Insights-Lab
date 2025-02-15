@@ -4,6 +4,7 @@ import TextView from "../InsightsViewType/TextView";
 import CodeView from "../InsightsViewType/CodeView";
 import PromptView from "../InsightsViewType/PromptView";
 import TableView from "../InsightsViewType/TableView";
+import "./AlbusInterface.scss"
 
 const AlbusInterface = () => {
   const [showMetadata, setShowMetadata] = useState(true);
@@ -109,274 +110,224 @@ const AlbusInterface = () => {
   };
 
   return (
-    <div className="min-h-screen font-poppins w-full p-6 bg-white flex flex-col">
-      {/* Top navigation */}
-      <div className="relative flex space-x-6 border-b">
-        <button
-          className={`relative pb-2 text-sm font-medium ${
-            activeTab === "all" ? "text-[#1a73e8]" : "text-gray-600"
-          }`}
-          onClick={() => setActiveTab("all")}
-        >
-          Ask Albus
-          {activeTab === "all" && (
-            <div className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-[#1a73e8]" />
-          )}
-        </button>
-      </div>
+    <div className="container">
+    {/* Top navigation */}
+    <div className="nav">
+      <button
+        className={`nav__button ${
+          activeTab === "all" ? "nav__button--active" : "nav__button--inactive"
+        }`}
+        onClick={() => setActiveTab("all")}
+      >
+        Ask Albus
+        {activeTab === "all" && <div className="nav__button-indicator" />}
+      </button>
+    </div>
 
-      {/* Info header */}
-      <div className="flex items-center justify-between mb-8 mt-4">
-        <div className="flex items-center">
-          <div>
-            <div className="text-sm text-gray-500">Data Product</div>
-            <div>Customerinsights</div>
-          </div>
-          
-          <div className="h-12 w-px bg-gray-200 mx-6" />
-          
-          <div>
-            <div className="text-sm text-gray-500">Last Refresh Date & Time</div>
-            <div>2025-01-29 05:18:46</div>
-          </div>
-          
-          <div className="h-12 w-px bg-gray-200 mx-6" />
-          
-          <div>
-            <div className="text-sm text-gray-500">No. of Column & Records</div>
-            <div>05 Columns, 359862 Records</div>
-          </div>
-          
-          <div className="h-12 w-px bg-gray-200 mx-6" />
-          
-          <div>
-            <div className="text-sm text-gray-500">Data Sensitivity</div>
-            <div>Public</div>
-          </div>
-          
-          <div className="h-12 w-px bg-gray-200 mx-6" />
-          
-          <div>
-            <div className="text-sm text-gray-500">PII</div>
-            <div>No</div>
-          </div>
+    {/* Info header */}
+    <div className="info-header">
+      <div className="info-header__section">
+        <div className="info-header__item">
+          <div className="info-header__label">Data Product</div>
+          <div className="info-header__value">Customerinsights</div>
         </div>
-
-        <div className="flex gap-2">
-          <button className="w-14 h-14 flex items-center justify-center p-4">
-          <img src="/assets/albus-add.png" alt="Ask Albus" className="w-full h-full object-contain" />
-        </button>
-        <button className="w-14 h-14 rounded-lg flex items-center justify-center p-4">
-          <img src="/assets/albus-2.png" alt="Ask Albus" className="w-full h-full object-contain " />
-        </button>
-        <button className="w-14 h-14  flex items-center justify-center p-4 rounded-lg">
-        <img
-            src="/assets/albus-resize.png"
-            alt="Ask Albus"
-            className="w-full h-full object-contain"
-        />
-        </button>
+        
+        <div className="info-header__section-divider" />
+        
+        <div className="info-header__item">
+          <div className="info-header__label">Last Refresh Date & Time</div>
+          <div className="info-header__value">2025-01-29 05:18:46</div>
+        </div>
+        
+        <div className="info-header__section-divider" />
+        
+        <div className="info-header__item">
+          <div className="info-header__label">No. of Column & Records</div>
+          <div className="info-header__value">05 Columns, 359862 Records</div>
+        </div>
+        
+        <div className="info-header__section-divider" />
+        
+        <div className="info-header__item">
+          <div className="info-header__label">Data Sensitivity</div>
+          <div className="info-header__value">Public</div>
+        </div>
+        
+        <div className="info-header__section-divider" />
+        
+        <div className="info-header__item">
+          <div className="info-header__label">PII</div>
+          <div className="info-header__value">No</div>
         </div>
       </div>
 
-      <div className="flex-grow flex flex-col">
-        <div className="mb-8 flex flex-col">
-          {isFirstSubmit && (
-            <>
-              <h2 className="text-xl font-semibold mb-1">Explore & Discover</h2>
-              <p className="text-sm text-gray-500 mb-4">
-                Your data product with our AI Assistance
-              </p>
-            </>
-          )}
-          
-          <div className="flex-grow mb-4">
-            {messages.map((message, index) => (
-              <div key={index} className="mb-4">
-                <div className="flex items-start gap-2">
-                  <div className={`w-8 h-8 ${message.type === 'user' ? 'bg-orange-500' : 'bg-white-500'} rounded-lg flex items-center justify-center text-white`}>
-                    {message.type === 'user' ? 'bb' : 'AI'}
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-sm text-gray-500 mb-1">{message.timestamp}</div>
-                    {message.type === 'user' ? (
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <pre className="whitespace-pre-wrap font-mono text-sm">{message.content}</pre>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="flex gap-1 mb-2 border rounded-md p-1 bg-white w-fit">
-                        <button 
-                onClick={() => setIsModalOpen(true)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <Save className="w-5 h-5" />
-              </button>
+      <div className="info-header__buttons">
+        <button className="info-header__button">
+          <img src="/assets/albus-add.png" alt="Ask Albus" />
+        </button>
+        <button className="info-header__button info-header__button--rounded">
+          <img src="/assets/albus-2.png" alt="Ask Albus" />
+        </button>
+        <button className="info-header__button info-header__button--rounded">
+          <img src="/assets/albus-resize.png" alt="Ask Albus" />
+        </button>
+      </div>
+    </div>
 
-<>
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-full max-w-md p-6 relative">
-            {/* Modal Header */}
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold">Save Insight</h2>
-              <button 
-                onClick={() => setIsModalOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm text-gray-700 mb-1">Insight Name</label>
-                <input 
-                  type="text"
-                  placeholder="Name"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                />
-              </div>
-            
-              <div className="flex justify-end gap-3 mt-6">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-[#054CA0] text-white rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Save
-              </button>
-            </div>
-            </div>
+    <div className="main-content">
+      <div className="message-section">
+        {isFirstSubmit && (
+          <div className="message-section__header">
+            <h2 className="message-section__title">Explore & Discover</h2>
+            <p className="message-section__subtitle">
+              Your data product with our AI Assistance
+            </p>
           </div>
-        </div>
-      )}
-    </>
-                          <button
-                            className={getButtonStyles("text")}
-                            onClick={() => setViewMode("text")}
-                          >
-                            <FileText className="w-4 h-4" />
-                          </button>
-                          <button
-                            className={getButtonStyles("code")}
-                            onClick={() => setViewMode("code")}
-                          >
-                            <Code className="w-4 h-4" />
-                          </button>
-                          <button
-                            className={getButtonStyles("table")}
-                            onClick={() => setViewMode("table")}
-                          >
-                            <Table className="w-4 h-4" />
-                          </button>
-                          <button
-                            className={getButtonStyles("prompt")}
-                            onClick={() => setViewMode("prompt")}
-                          >
-                            <MessageSquare className="w-4 h-4" />
-                          </button>
-                          
-                        </div>
-                        {renderViewContent(message.content)}
-                      </>
-                    )}
-                  </div>
-                  <div className="flex gap-2">
-                    <button className="p-2 hover:bg-gray-100 rounded-lg">
-                      <Share2 className="w-4 h-4" />
-                    </button>
-                    <button className="p-2 hover:bg-gray-100 rounded-lg">
-                      <Maximize2 className="w-4 h-4" />
-                    </button>
-                  </div>
+        )}
+        
+        <div className="messages">
+          {messages.map((message, index) => (
+            <div key={index} className="messages__item">
+              <div className="messages__avatar-wrapper">
+                <div className={`messages__avatar ${
+                  message.type === 'user' ? 'messages__avatar--user' : 'messages__avatar--ai'
+                }`}>
+                  {message.type === 'user' ? 'bb' : 'AI'}
                 </div>
               </div>
-            ))}
-          </div>
-          
-          {isFirstSubmit ? (
-            <div>
-              <textarea
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                className="w-full min-h-36 border rounded-lg p-4"
-                placeholder="Type your prompt here"
-              />
-              <div className="flex justify-end mt-4">
-                <button 
-                  onClick={handleSubmit}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                >
-                  Submit
+              <div className="messages__content">
+                <div className="messages__timestamp">{message.timestamp}</div>
+                {message.type === 'user' ? (
+                  <div className="messages__user-content">
+                    <pre>{message.content}</pre>
+                  </div>
+                ) : (
+                  <>
+                    <div className="view-controls">
+                      <button 
+                        onClick={() => setIsModalOpen(true)}
+                        className="view-controls__button"
+                      >
+                        <Save className="view-controls__icon" />
+                      </button>
+                      <button
+                        className={`view-controls__button ${viewMode === "text" ? "view-controls__button--active" : ""}`}
+                        onClick={() => setViewMode("text")}
+                      >
+                        <FileText className="view-controls__icon" />
+                      </button>
+                      <button
+                        className={`view-controls__button ${viewMode === "code" ? "view-controls__button--active" : ""}`}
+                        onClick={() => setViewMode("code")}
+                      >
+                        <Code className="view-controls__icon" />
+                      </button>
+                      <button
+                        className={`view-controls__button ${viewMode === "table" ? "view-controls__button--active" : ""}`}
+                        onClick={() => setViewMode("table")}
+                      >
+                        <Table className="view-controls__icon" />
+                      </button>
+                      <button
+                        className={`view-controls__button ${viewMode === "prompt" ? "view-controls__button--active" : ""}`}
+                        onClick={() => setViewMode("prompt")}
+                      >
+                        <MessageSquare className="view-controls__icon" />
+                      </button>
+                    </div>
+                    {renderViewContent(message.content)}
+                  </>
+                )}
+              </div>
+              <div className="messages__actions">
+                <button className="messages__action-button">
+                  <Share2 className="messages__action-icon" />
+                </button>
+                <button className="messages__action-button">
+                  <Maximize2 className="messages__action-icon" />
                 </button>
               </div>
             </div>
-          ) : (
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                className="flex-grow border rounded-lg p-3"
-                placeholder="Type your follow up prompt here"
-              />
+          ))}
+        </div>
+        
+        {isFirstSubmit ? (
+          <div className="input-area input-area--first">
+            <textarea
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              className="input-area__textarea"
+              placeholder="Type your prompt here"
+            />
+            <div className="input-area__submit">
               <button 
                 onClick={handleSubmit}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="input-area__button"
               >
                 Submit
               </button>
             </div>
-          )}
-        </div>
-
-        {showMetadata && (
-          <div className="flex-grow overflow-auto">
-            <div className="flex justify-between items-center mb-4">
-              <div className="font-medium">Metadata</div>
-              <button onClick={() => setShowMetadata(false)} className="p-1 hover:bg-gray-100 rounded-full">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="text-left p-3">#</th>
-                    <th className="text-left p-3">Field Name</th>
-                    <th className="text-left p-3">Business Name</th>
-                    <th className="text-left p-3">Business Description</th>
-                    <th className="text-left p-3">Data Domain</th>
-                    <th className="text-left p-3">PII Type</th>
-                    <th className="text-left p-3">Sample Values</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {metadata.map((row) => (
-                    <tr key={row.id} className="border-b">
-                      <td className="p-3">{row.id}</td>
-                      <td className="p-3">{row.fieldName}</td>
-                      <td className="p-3">{row.businessName}</td>
-                      <td className="p-3">{row.businessDescription}</td>
-                      <td className="p-3">{row.dataDomain}</td>
-                      <td className="p-3">{row.piiType}</td>
-                      <td className="p-3">{row.sampleValues}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+          </div>
+        ) : (
+          <div className="input-area input-area--follow-up">
+            <input
+              type="text"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              className="input-area__input"
+              placeholder="Type your follow up prompt here"
+            />
+            <button 
+              onClick={handleSubmit}
+              className="input-area__button"
+            >
+              Submit
+            </button>
           </div>
         )}
       </div>
+
+      {showMetadata && (
+        <div className="metadata">
+          <div className="metadata__header">
+            <div className="metadata__title">Metadata</div>
+            <button onClick={() => setShowMetadata(false)} className="metadata__close">
+              <X className="metadata__close-icon" />
+            </button>
+          </div>
+
+          <div className="metadata__table-wrapper">
+            <table className="metadata__table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Field Name</th>
+                  <th>Business Name</th>
+                  <th>Business Description</th>
+                  <th>Data Domain</th>
+                  <th>PII Type</th>
+                  <th>Sample Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                {metadata.map((row) => (
+                  <tr key={row.id}>
+                    <td>{row.id}</td>
+                    <td>{row.fieldName}</td>
+                    <td>{row.businessName}</td>
+                    <td>{row.businessDescription}</td>
+                    <td>{row.dataDomain}</td>
+                    <td>{row.piiType}</td>
+                    <td>{row.sampleValues}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
+  </div>
   );
 };
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ProductCard } from "../LandingPage/ProductCard";
 import { InsightsOptionCard } from "./InsightsOptionCard";
+import "./CreateInsightModal.scss";
 
 const CreateInsightModal = () => {
   const containerRef = useRef(null);
@@ -12,33 +12,21 @@ const CreateInsightModal = () => {
   const productData = [
     {
       id: "albus",
-      icon: (
-        <div className="w-34 h-34 rounded-full flex items-center justify-center p-4 border-2 border-blue-400 mb-2">
-          <img src="/assets/albus.png" alt="Ask Albus" className="w-full h-full object-contain rounded-full" />
-        </div>
-      ),
+      icon: <img src="/assets/albus.png" alt="Ask Albus" className="product-icon" />,
       title: "Ask Albus",
       description: "Interconnected entities enabling smart insights.",
       route: "/albus",
     },
     {
       id: "sql",
-      icon: (
-        <div className="w-34 h-34 rounded-full flex items-center justify-center mb-2 p-4 border-2 border-blue-400">
-          <img src="/assets/sql.png" alt="SQL studio" className="w-full h-full object-contain rounded-full" />
-        </div>
-      ),
+      icon: <img src="/assets/sql.png" alt="SQL studio" className="product-icon" />,
       title: "SQL Studio",
       description: "Manage databases with intuitive tools",
       route: "/sql",
     },
     {
       id: "notebook",
-      icon: (
-        <div className="w-34 h-34 rounded-full flex items-center justify-center mb-2 p-4 border-2 border-blue-400">
-          <img src="/assets/python.png" alt="Python Code" className="w-full h-full object-contain rounded-full" />
-        </div>
-      ),
+      icon: <img src="/assets/python.png" alt="Python Code" className="product-icon" />,
       title: "Python Code",
       description: "Developing applications with Python functionality",
       route: "/notebook",
@@ -74,14 +62,14 @@ const CreateInsightModal = () => {
   }, []);
 
   return (
-    <main className="flex-1 p-6 bg-white overflow-auto">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h2 className="text-lg">Supplychain Analysis</h2>
+    <main className="modal-container">
+      <div className="content-wrapper">
+        <div className="heading">
+          <h2>Supplychain Analysis</h2>
         </div>
 
-        <div className="relative" ref={containerRef}>
-          <svg className="absolute inset-0 pointer-events-none" style={{ width: "100%", height: "100%" }}>
+        <div className="product-container" ref={containerRef}>
+          <svg className="svg-lines">
             {lines.map((line, index) => (
               <line
                 key={index}
@@ -96,39 +84,23 @@ const CreateInsightModal = () => {
             ))}
           </svg>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="product-grid">
             {productData.map((product) => (
               <div
                 key={product.id}
-                className={`product-card cursor-pointer p-2 rounded-lg border-2 transition duration-200 ${
-                  selectedProduct?.id === product.id ? "border-blue-500" : "border-transparent"
-                }`}
+                className={`product-card ${selectedProduct?.id === product.id ? "selected" : ""}`}
                 onClick={() => setSelectedProduct(product)}
               >
-                <InsightsOptionCard
-                  icon={product.icon}
-                  title={product.title}
-                  description={product.description}
-                />
+                <InsightsOptionCard icon={product.icon} title={product.title} description={product.description} />
               </div>
             ))}
           </div>
         </div>
 
         {selectedProduct && (
-          <div className="mt-6 flex justify-end gap-4">
-            <button
-              className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
-              onClick={() => setSelectedProduct(null)}
-            >
-              Cancel
-            </button>
-            <button
-              className="px-4 py-2 bg-[#054CA0] text-white rounded-md hover:bg-blue-700 transition-colors"
-              onClick={() => navigate(selectedProduct.route)}
-            >
-              Create
-            </button>
+          <div className="action-buttons">
+            <button className="cancel-btn" onClick={() => setSelectedProduct(null)}>Cancel</button>
+            <button className="create-btn" onClick={() => navigate(selectedProduct.route)}>Create</button>
           </div>
         )}
       </div>

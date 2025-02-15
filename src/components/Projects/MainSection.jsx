@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { InsightsOptionCard } from "./InsightsOptionCard";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import "./MainSection.scss"
 
 const MainSection = ({ insights }) => {
   const { id } = useParams();
@@ -12,8 +13,8 @@ const MainSection = ({ insights }) => {
   const productData = [
     {
       icon: (
-        <div className="w-34 h-34 rounded-full flex items-center justify-center p-4 border-2 border-blue-400 mb-2">
-          <img src="/assets/albus.png" alt="Ask Albus" className="w-full h-full object-contain rounded-full" />
+        <div className="product-icon">
+          <img src="/assets/albus.png" alt="Ask Albus" />
         </div>
       ),
       title: "Ask Albus",
@@ -22,8 +23,8 @@ const MainSection = ({ insights }) => {
     },
     {
       icon: (
-        <div className="w-34 h-34 rounded-full flex items-center justify-center mb-2 p-4 border-2 border-blue-400">
-          <img src="/assets/sql.png" alt="SQL studio" className="w-full h-full object-contain rounded-full" />
+        <div className="product-icon">
+          <img src="/assets/sql.png" alt="SQL studio" />
         </div>
       ),
       title: "SQL Studio",
@@ -32,8 +33,8 @@ const MainSection = ({ insights }) => {
     },
     {
       icon: (
-        <div className="w-34 h-34 rounded-full flex items-center justify-center mb-2 p-4 border-2 border-blue-400">
-          <img src="/assets/python.png" alt="Python Code" className="w-full h-full object-contain rounded-full" />
+        <div className="product-icon">
+          <img src="/assets/python.png" alt="Python Code" />
         </div>
       ),
       title: "Python Code",
@@ -73,23 +74,19 @@ const MainSection = ({ insights }) => {
   if (id) {
     const project = insights?.find((p) => p.id === Number(id));
     if (!project) {
-      return <div className="p-6">Project not found</div>;
+      return <div className="error-message">Project not found</div>;
     }
   }
 
   return (
-    <main className="flex-1 p-6 bg-white overflow-auto">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h2 className="text-lg font-poppins">Use one of these three options to create an insight:</h2>
+    <main className="main-section">
+      <div className="main-section__container">
+        <div className="main-section__header">
+          <p>Use one of these three options to create an insight:</p>
         </div>
 
-        <div className="relative" ref={containerRef}>
-      
-          <svg 
-            className="absolute inset-0 pointer-events-none" 
-            style={{ width: '100%', height: '100%' }}
-          >
+        <div className="main-section__grid-container" ref={containerRef}>
+          <svg className="main-section__svg-container">
             {lines.map((line, index) => (
               <line
                 key={index}
@@ -104,7 +101,7 @@ const MainSection = ({ insights }) => {
             ))}
           </svg>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="main-section__grid">
             {productData.map((product, index) => (
               <div key={index} className="product-card">
                 <InsightsOptionCard

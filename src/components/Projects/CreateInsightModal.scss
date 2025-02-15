@@ -1,0 +1,95 @@
+.modal-container {
+    flex: 1;
+    padding: 24px;
+    background-color: white;
+    overflow: auto;
+  }
+  
+  .content-wrapper {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  
+  .heading {
+    margin-bottom: 20px;
+  
+    h2 {
+      font-size: 18px;
+    }
+  }
+  
+  .product-container {
+    position: relative;
+  }
+  
+  .svg-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  
+  .product-card {
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+    background-color: #ffffff;
+  
+    &.selected {
+      border-color: #054ca0;
+    }
+  }
+  
+  .product-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: contain;
+    border: 2px solid #3b82f6;
+    padding: 8px;
+  }
+  
+  .action-buttons {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+  
+  .cancel-btn {
+    padding: 8px 16px;
+    color: #4b5563;
+    background-color: #f3f4f6;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  
+    &:hover {
+      background-color: #e5e7eb;
+    }
+  }
+  
+  .create-btn {
+    padding: 8px 16px;
+    background-color: #054ca0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  
+    &:hover {
+      background-color: #003d9e;
+    }
+  }
+  

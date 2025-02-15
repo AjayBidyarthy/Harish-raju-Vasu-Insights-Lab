@@ -1,6 +1,7 @@
-import { BrowserRouter as Router } from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom";
 import MainSection from "./MainSection";
 import SideNav from "./SideNav";
+import "./ProjectPage.scss"
 
 export const insights = [
   { id: 1, name: "Project 1", insights: 10, insights_workbook: 5, added_products: 5 },
@@ -12,15 +13,11 @@ export const insights = [
 
 export function ProjectPage() {
   return (
-  
-      <div className="flex min-h-screen bg-gray-50">
-        <SideNav insights={insights} />
-        <main className="flex-1">
-          <MainSection insights={insights} />
-        </main>
-      </div>
-    
+    <div className="project-page">
+      <SideNav insights={insights} />
+      <main className="main-section">
+        <MainSection insights={insights} />
+      </main>
+    </div>
   );
 }
-
-

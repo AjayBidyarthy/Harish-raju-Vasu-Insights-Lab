@@ -1,0 +1,47 @@
+.text-view-container {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+      color: #1f2937; // Dark gray
+    }
+  
+    .text-view-table {
+      font-family: 'Courier New', monospace;
+  
+      .table-header {
+        display: flex;
+        font-weight: 600;
+        color: #6b7280; // Gray text
+        margin-bottom: 0.5rem;
+      }
+  
+      .table-row {
+        display: flex;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e5e7eb;
+  
+        &:hover {
+          background-color: #f3f4f6; // Light hover effect
+        }
+      }
+  
+      .column-id {
+        width: 3rem;
+      }
+  
+      .column-name {
+        width: 10rem;
+      }
+  
+      .column-count {
+        width: 5rem;
+      }
+    }
+  }
+  

@@ -1,4 +1,5 @@
 import React from 'react';
+import './TableView.scss';
 
 const TableView = () => {
   const countries = [
@@ -14,19 +15,19 @@ const TableView = () => {
   ];
 
   return (
-    <div className="border rounded-lg overflow-hidden">
-      <table className="w-full">
-        <thead className="bg-gray-50">
+    <div className="table-container">
+      <table>
+        <thead>
           <tr>
-            <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">#</th>
-            <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">name</th>
+            <th>#</th>
+            <th>Name</th>
           </tr>
         </thead>
         <tbody>
           {countries.map((country, index) => (
-            <tr key={country} className="border-t">
-              <td className="px-4 py-2 text-sm text-gray-600">{index + 1}</td>
-              <td className="px-4 py-2 text-sm text-gray-600">{country}</td>
+            <tr key={country}>
+              <td>{index + 1}</td>
+              <td>{country}</td>
             </tr>
           ))}
         </tbody>

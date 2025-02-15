@@ -1,31 +1,23 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Home, Network} from "lucide-react"
+import * as React from "react";
+import { Home, Network } from "lucide-react";
+import "./Sidebar.scss";
 
-export  function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = React.useState(false)
-
+export function Sidebar() {
   return (
-    <div className="flex h-screen">
-    <nav className="flex flex-col bg-[#F8F8F8] text-white w-[60px] py-4 border-r-2 border-blue-400">
-        <div className="flex flex-col items-center space-y-6">
-          <button
-            onClick={() => (window.location.href = "/")}
-            className="p-3  text-blue-800 rounded-lg transition-colors"
-          >
+    <div className="sidebar-container">
+      <nav className="sidebar">
+        <div className="sidebar-menu">
+          <button onClick={() => (window.location.href = "/")} className="sidebar-button">
             <Home size={20} />
           </button>
-          <button
-            onClick={() => (window.location.href = "/network")}
-            className="p-3  text-blue-800 rounded-lg transition-colors"
-          >
+          <button onClick={() => (window.location.href = "/network")} className="sidebar-button">
             <Network size={20} />
           </button>
-          <div className="flex-1" />
+          <div className="spacer" />
         </div>
       </nav>
     </div>
-  )
+  );
 }
-

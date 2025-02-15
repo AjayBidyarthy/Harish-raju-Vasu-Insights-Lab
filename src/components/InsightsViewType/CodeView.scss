@@ -1,0 +1,40 @@
+.code-view {
+    background: #f9fafb; // Light gray background
+    border-radius: 0.5rem;
+    padding: 1rem;
+    height: 500px;
+    overflow: auto;
+    font-family: "Fira Code", monospace; // Better font for code
+    font-size: 0.875rem;
+  
+    pre {
+      white-space: pre-wrap;
+    }
+  
+    .keyword {
+      color: #1f2937; // Tailwind's gray-800 (black-600 equivalent)
+      font-weight: bold;
+    }
+  
+    .operator {
+      color: #000; // Black
+    }
+  
+    .string {
+      color: #dc2626; // Tailwind's red-600
+    }
+  
+    .variable {
+      color: #1f2937; // Gray-800
+    }
+  
+    .function {
+      color: #2563eb; // Tailwind's blue-600
+      font-weight: bold;
+    }
+  
+    .parentheses {
+      color: black;
+    }
+  }
+  

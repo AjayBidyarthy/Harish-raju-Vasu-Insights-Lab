@@ -1,5 +1,6 @@
 import { Warehouse } from "lucide-react";
 import { useLocation, useParams } from "react-router-dom";
+import "./Toolbar.scss";
 
 export const Toolbar = () => {
   const location = useLocation();
@@ -14,30 +15,26 @@ export const Toolbar = () => {
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const basePath = `/${pathSegments[0]}`;
   const currentPage = pageTitles[basePath] || "";
-
-
   const itemId = pathSegments[1] ? `#${pathSegments[1]}` : "";
 
   return (
-    <div className="bg-white border-b px-6 py-6 bg-[#EBFAFF]">
-      <div className="flex items-center gap-6">
-        <button className="text-gray-600 hover:text-gray-900">
-          <Warehouse className="w-5 h-5" />
+    <div className="toolbar">
+      <div className="toolbar-content">
+        <button className="icon-button">
+          <Warehouse className="icon" />
         </button>
-        <div className="flex items-center gap-3">
-          <button className="text-black-600 font-poppins hover:text-gray-900">
-            Insights lab
-          </button>
+        <div className="breadcrumb">
+          <button className="breadcrumb-home">Insights Lab</button>
           {currentPage && (
             <>
-              <span className="text-gray-500"> | </span>
-              <span className="text-blue-600 font-poppins">{currentPage}</span>
+              <span className="separator"> | </span>
+              <span className="breadcrumb-current">{currentPage}</span>
             </>
           )}
           {itemId && (
             <>
-              <span className="text-gray-500"> &gt; </span>
-              <span className="text-black-600 font-poppins">{itemId}</span>
+              <span className="separator"> &gt; </span>
+              <span className="breadcrumb-item">{itemId}</span>
             </>
           )}
         </div>

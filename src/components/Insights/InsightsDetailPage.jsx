@@ -2,6 +2,7 @@
 import SideNav from "../Projects/SideNav";
 import InsightsInfo from "./InsightsInfo";
 import InsightsList from "./InsightsList";
+import "./InsightsDetailPage.scss"
 
 // export const insights1 = [
 //   { id: 1, name: "Project 1", insights: 10, insights_workbook: 5, added_products: 5 },
@@ -91,15 +92,14 @@ import InsightsList from "./InsightsList";
     }
   ];
 
-export function InsightsDetailPage() {
-  return (
-  
-      <div className="flex min-h-screen bg-white">
-        <SideNav insights={projectData}  />
-        <main className="flex-1">
-        <InsightsInfo/>
+  export function InsightsDetailPage() {
+    return (
+      <div className="insights-detail-page">
+        <SideNav insights={projectData} className="side-nav" />
+        <main className="main-content">
+          <InsightsInfo />
         </main>
       </div>
-    
-  );
-}
+    );
+  }
+  

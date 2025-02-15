@@ -3,14 +3,15 @@ import { Sidebar } from "../components/LandingPage/Sidebar";
 import { Toolbar } from "../components/LandingPage/Toolbar";
 import SearchBar from "../components/DataProducts/SearchBar";
 import { InsightsPage } from "../components/Insights/InsightsPage";
+import "./LandingPage.scss";
 
  export function Insights() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="landing-page">
       <Header />
-      <div className="flex flex-1">
+      <div className="content">
         <Sidebar />
-        <div className="flex-1 flex flex-col bg-[#F8F8F8]">
+        <div className="main-content">
         <Toolbar/>
         <SearchBar/>
         <InsightsPage/>

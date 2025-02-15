@@ -1,0 +1,48 @@
+.main-content {
+    flex: 1;
+    overflow: auto;
+  }
+  
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .welcome-section {
+    margin-bottom: 32px;
+    padding-top: 24px;
+  
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+  
+    p {
+      color: #6b7280;
+    }
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  
+  .icon-container {
+    width: 120px;
+    height: 120px;
+    background-color: #00758f;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  
+  .icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+  

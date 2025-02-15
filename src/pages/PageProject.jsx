@@ -4,15 +4,15 @@ import { Sidebar } from '../components/LandingPage/Sidebar'
 import { Toolbar } from '../components/LandingPage/Toolbar'
 import SearchBar from '../components/DataProducts/SearchBar'
 import { ProjectPage } from '../components/Projects/ProjectPage'
-
+import "./LandingPage.scss";
 
 const PageProject = () => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="landing-page">
     <Header />
-    <div className="flex flex-1">
+    <div className="content">
       <Sidebar />
-      <div className="flex-1 flex flex-col bg-[#f5f9fc]">
+      <div className="main-content">
       <Toolbar/>
       <SearchBar/>
     <ProjectPage/>

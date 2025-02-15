@@ -1,4 +1,5 @@
 import React from 'react';
+import './TextView.scss';
 
 const TextView = () => {
   const data = [
@@ -21,19 +22,19 @@ const TextView = () => {
   ];
 
   return (
-    <div className="font-poppins bg-gray-50 p-6 rounded-lg shadow-sm">
-      <h2 className="text-lg mb-4">Here are the details for the n_name column:</h2>
-      <div className="font-mono">
-        <div className="flex mb-2 text-gray-600">
-          <span className="w-12"></span>
-          <span className="w-40">n_name</span>
-          <span className="w-24">count</span>
+    <div className="text-view-container">
+      <h2>Here are the details for the n_name column:</h2>
+      <div className="text-view-table">
+        <div className="table-header">
+          <span className="column-id"></span>
+          <span className="column-name">n_name</span>
+          <span className="column-count">count</span>
         </div>
         {data.map(item => (
-          <div key={item.id} className="flex py-1 hover:bg-gray-100">
-            <span className="w-12">{item.id}</span>
-            <span className="w-40">{item.name}</span>
-            <span className="w-24">{item.count}</span>
+          <div key={item.id} className="table-row">
+            <span className="column-id">{item.id}</span>
+            <span className="column-name">{item.name}</span>
+            <span className="column-count">{item.count}</span>
           </div>
         ))}
       </div>

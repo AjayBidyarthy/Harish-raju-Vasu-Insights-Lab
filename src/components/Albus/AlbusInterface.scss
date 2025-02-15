@@ -1,0 +1,457 @@
+// styles.scss
+
+// Variables
+$primary-color: #1a73e8;
+$blue-700: #054CA0;
+$gray-50: #f9fafb;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-500: #6b7280;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$orange-500: #f97316;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Container
+.container {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+// Navigation
+.nav {
+  position: relative;
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid $gray-200;
+
+  &__button {
+    position: relative;
+    padding-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    
+    &--active {
+      color: $primary-color;
+    }
+
+    &--inactive {
+      color: $gray-600;
+    }
+
+    &-indicator {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $primary-color;
+    }
+  }
+}
+
+// Info Header
+.info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0 2rem;
+
+  &__section {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    padding: 0 0.5rem;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    color: $gray-500;
+  }
+
+  &__section-divider {
+    height: 3rem;
+    width: 1px;
+    background-color: $gray-200;
+    margin: 0 1.5rem;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__button {
+    width: 3.5rem;
+    height: 3.5rem;
+    @include flex-center;
+    padding: 1rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    &--rounded {
+      border-radius: 0.5rem;
+    }
+  }
+}
+
+// Message Section
+.message-section {
+  margin-bottom: 2rem;
+
+  &__header {
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: $gray-500;
+  }
+}
+
+// Messages
+.messages {
+  &__item {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  &__avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    @include flex-center;
+    color: white;
+
+    &--user {
+      background-color: $orange-500;
+    }
+
+    &--ai {
+      background-color: white;
+    }
+  }
+
+  &__timestamp {
+    font-size: 0.875rem;
+    color: $gray-500;
+    margin-bottom: 0.25rem;
+  }
+
+  &__user-content {
+    background-color: $gray-50;
+    padding: 1rem;
+    border-radius: 0.5rem;
+
+    pre {
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 0.875rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__action-button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+
+    &:hover {
+      background-color: $gray-100;
+    }
+  }
+
+  &__action-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// View Controls
+.view-controls {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid $gray-200;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+  background-color: white;
+  width: fit-content;
+
+  &__button {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    
+    &:hover {
+      background-color: $gray-100;
+    }
+
+    &--active {
+      background-color: $gray-100;
+    }
+  }
+
+  &__icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// Input Area
+.input-area {
+  &--first {
+    margin-top: 1rem;
+  }
+
+  &--follow-up {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__textarea {
+    width: 100%;
+    min-height: 9rem;
+    border: 1px solid $gray-200;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    resize: vertical;
+  }
+
+  &__input {
+    flex-grow: 1;
+    border: 1px solid $gray-200;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  &__submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+
+  &__button {
+    padding: 0.5rem 1rem;
+    background-color: $blue-700;
+    color: white;
+    border-radius: 0.375rem;
+    
+    &:hover {
+      background-color: darken($blue-700, 5%);
+    }
+  }
+}
+
+// Metadata
+.metadata {
+    flex-grow: 1;
+    overflow: auto;
+  
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+  
+    &__title {
+      font-weight: 500;
+    }
+  
+    &__close {
+      padding: 0.25rem;
+      border-radius: 9999px;
+  
+      &:hover {
+        background-color: $gray-100;
+      }
+    }
+  
+    &__close-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  
+    &__table-wrapper {
+      overflow-x: auto;
+    }
+  
+    &__table {
+      width: 100%;
+      font-size: 0.875rem;
+  
+      th {
+        text-align: left;
+        padding: 0.75rem;
+        background-color: $gray-50;
+      }
+  
+      td {
+        padding: 0.75rem;
+        border-bottom: 1px solid $gray-200;
+      }
+  
+      tr {
+        &:hover {
+          background-color: $gray-50;
+        }
+      }
+    }
+  }
+  
+  // Modal
+  .modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    @include flex-center;
+    z-index: 50;
+  
+    &__content {
+      background-color: white;
+      border-radius: 0.5rem;
+      width: 100%;
+      max-width: 28rem;
+      padding: 1.5rem;
+      position: relative;
+    }
+  
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+  
+      h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+    }
+  
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+  
+      label {
+        display: block;
+        font-size: 0.875rem;
+        color: $gray-700;
+        margin-bottom: 0.25rem;
+      }
+  
+      input {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid $gray-200;
+        border-radius: 0.375rem;
+  
+        &:focus {
+          outline: none;
+          ring: 1px solid $primary-color;
+        }
+      }
+    }
+  
+    &__actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+  
+      button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        transition: background-color 0.2s;
+  
+        &.cancel {
+          color: $gray-600;
+  
+          &:hover {
+            background-color: $gray-100;
+          }
+        }
+  
+        &.save {
+          background-color: $blue-700;
+          color: white;
+  
+          &:hover {
+            background-color: darken($blue-700, 5%);
+          }
+        }
+      }
+    }
+  }
+  
+  // Utility classes
+  .main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .info-header {
+      flex-direction: column;
+      gap: 1rem;
+  
+      &__section {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+  
+      &__section-divider {
+        display: none;
+      }
+    }
+  
+    .messages {
+      &__item {
+        flex-direction: column;
+      }
+  
+      &__actions {
+        margin-top: 0.5rem;
+      }
+    }
+  
+    .input-area {
+      &--follow-up {
+        flex-direction: column;
+      }
+  
+      &__button {
+        width: 100%;
+      }
+    }
+  }
